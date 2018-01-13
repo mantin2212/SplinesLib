@@ -2,7 +2,6 @@ package routes;
 
 import functions.DifferentiableFunction;
 import utils.Point;
-import utils.Utils;
 
 /**
  * @author noam mantin the class describes a route, going between 2 certain
@@ -20,6 +19,9 @@ public abstract class Route {
 	protected DifferentiableFunction xFunction;
 	protected DifferentiableFunction yFunction;
 
+	protected RoutePoint[] data;
+	protected int pointsNumber;
+
 	// the start and finish points
 	private Point start;
 	private Point finish;
@@ -33,7 +35,7 @@ public abstract class Route {
 	/** the parameters used to specify the route, @see Spline for example **/
 	protected double[] routeParameters;
 
-	public Route(Point start, Point finish, double startArg, double finishArg, double... parameters) {
+	public Route(Point start, Point finish, double startArg, double finishArg, int pointNumber, double... parameters) {
 
 		// initializing class variables
 		this.start = start;
@@ -43,16 +45,14 @@ public abstract class Route {
 		this.finishArg = finishArg;
 
 		routeParameters = parameters;
+		this.pointsNumber = pointNumber;
 
 		// calculating the axis functions
 		calculateXAndYFunctions();
+		initializeData(pointNumber);
 	}
 
-	/**
-	 * a function which should calculate the x(s) and y(s) functions using the start
-	 * and finish points and the route constants
-	 */
-	public abstract void calculateXAndYFunctions();
+	protected abstract void calculateXAndYFunctions();
 
 	/**
 	 * the function receives an axis and returns the relevant data about the axis
@@ -81,8 +81,7 @@ public abstract class Route {
 		return new double[] { start.getY(), finish.getY(), Math.sin(startArg), Math.sin(finishArg) };
 	}
 
-	//////////////////////// ROUTE DATA FUNCTIONS//////////////////////////
-
+	//////////////// CONTINOUS ROUTE DATA FUNCTIONS//////////////////////////
 	/*
 	 * the following functions receive a certain s and return some data about the
 	 * route at the specific point
@@ -96,6 +95,7 @@ public abstract class Route {
 	 * 
 	 * @return: the point where the route passes at the received s.
 	 */
+
 	public Point get(double s) {
 		return new Point(xFunction.apply(s), yFunction.apply(s));
 	}
@@ -122,7 +122,7 @@ public abstract class Route {
 		return arg;
 	}
 
-	public double getLinearVelocity(double s) {
+	private double getLinearVelocity(double s) {
 
 		// calculating the derivatives of the axis functions at s
 		double xDiff = xFunction.getDerivative().apply(s);
@@ -134,7 +134,7 @@ public abstract class Route {
 		return result;
 	}
 
-	public double getAngularVelocity(double s) {
+	private double getAngularVelocity(double s) {
 
 		// calculating first and second derivatives of the axis functions at s
 		double x1 = xFunction.getDerivative().apply(s);
@@ -151,12 +151,17 @@ public abstract class Route {
 		return numerator / denominator;
 	}
 
-	public double getTotalDistance(double s) {
-		/*
-		 * calculating and returning the integral of the linear velocity from 0 to the
-		 * certain s
-		 */
-		return Utils.calculateIntegral(this::getLinearVelocity, 0, s, INTEGRAL_STEP);
+	private double getDistance(int k) {
+		if (k == 0)
+			return 0;
+		return Point.distance(data[k], data[k - 1]);
+	}
+
+	private double getTotalDistance(int k) {
+		double distance = 0;
+		for (int i = 1; i < k; i++)
+			distance += getDistance(i);
+		return distance;
 	}
 
 	/**
@@ -169,45 +174,16 @@ public abstract class Route {
 	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
 	 *         w- angular velocity)
 	 */
-	public double getCurrentRadius(double s) {
+	private double getCurrentRadius(double s) {
 		return getLinearVelocity(s) / getAngularVelocity(s);
 	}
 
-	/**
-	 * a function which returns the x function of the route
-	 * 
-	 * @return the x function
-	 */
-	public DifferentiableFunction getXFunction() {
-		return xFunction;
-	}
+	private void initializeData(int n) {
+		double s;
 
-	/**
-	 * a function which returns the y function of the route
-	 * 
-	 * @return the y function
-	 */
-	public DifferentiableFunction getYFunction() {
-		return yFunction;
-	}
-
-	/**
-	 * a function which returns the route as an array of points of the form
-	 * (x(s),y(s)).
-	 * 
-	 * @param step:
-	 *            the progress of s from one point to the next one.
-	 * 
-	 * @return: the array containing a number of points along the route, according
-	 *          to the step.
-	 */
-	public Point[] getPointArray(int n) {
-
-		Point[] arr = new Point[n + 1];
-
-		for (int i = 0; i <= n; i++) {
-			arr[i] = this.get((double) i / n);
+		for (int k = 0; k <= n; k++) {
+			s = (double) k / n;
+			data[k] = new RoutePoint(get(s), getArgument(s), getCurrentRadius(s), getDistance(k), getTotalDistance(k));
 		}
-		return arr;
 	}
 }

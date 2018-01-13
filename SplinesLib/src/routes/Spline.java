@@ -5,8 +5,8 @@ import utils.Utils;
 
 public class Spline extends Route {
 
-	public Spline(Point start, Point finish, double startArg, double finishArg, double k) {
-		super(start, finish, startArg, finishArg, k);
+	public Spline(Point start, Point finish, double startArg, double finishArg, int pointsNumber, double k) {
+		super(start, finish, startArg, finishArg, pointsNumber, k);
 	}
 
 	@Override
