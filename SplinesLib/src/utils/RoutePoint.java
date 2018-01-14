@@ -1,14 +1,12 @@
-package routes;
-
-import utils.Point;
+package utils;
 
 public class RoutePoint extends Point {
 
-	private double arg;
-	private double radius;
+	private final double arg;
+	private final double radius;
 
-	private double distance;
-	private double totalDistance;
+	private final double distance;
+	private final double totalDistance;
 
 	public RoutePoint(Point p, double arg, double radius, double distance, double totalDistance) {
 		super(p);
