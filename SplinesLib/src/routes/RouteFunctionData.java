@@ -9,10 +9,27 @@ public class RouteFunctionData {
 	private double derivativeAt1;
 
 	public RouteFunctionData(double functionAt0, double functionAt1, double derivativeAt0, double derivativeAt1) {
-		super();
+
 		this.functionAt0 = functionAt0;
 		this.functionAt1 = functionAt1;
+
 		this.derivativeAt0 = derivativeAt0;
+		this.derivativeAt1 = derivativeAt1;
+	}
+
+	public void setFunctionAt0(double functionAt0) {
+		this.functionAt0 = functionAt0;
+	}
+
+	public void setFunctionAt1(double functionAt1) {
+		this.functionAt1 = functionAt1;
+	}
+
+	public void setDerivativeAt0(double derivativeAt0) {
+		this.derivativeAt0 = derivativeAt0;
+	}
+
+	public void setDerivativeAt1(double derivativeAt1) {
 		this.derivativeAt1 = derivativeAt1;
 	}
 
