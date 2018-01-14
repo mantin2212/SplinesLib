@@ -1,7 +1,9 @@
 package routes;
 
 import functions.DifferentiableFunction;
+import routes.RouteDescription.Axis;
 import utils.Point;
+import utils.RoutePoint;
 
 /**
  * @author noam mantin the class describes a route, going between 2 certain
@@ -11,74 +13,32 @@ import utils.Point;
  */
 public abstract class Route {
 
-	enum Axis {
-		X, Y
-	}
-
 	// the following are the x(s) and y(s) functions
-	protected DifferentiableFunction xFunction;
-	protected DifferentiableFunction yFunction;
+	private static DifferentiableFunction xFunction;
+	private static DifferentiableFunction yFunction;
 
-	protected RoutePoint[] data;
-	protected int pointsNumber;
+	private static RoutePoint[] routeData;
+	private static int pointsNumber;
 
-	// the start and finish points
-	private Point start;
-	private Point finish;
+	public static RoutePoint[] getRoute(RouteDescription description, int PointNumber) {
+		xFunction = description.getFunction(Axis.X);
+		yFunction = description.getFunction(Axis.Y);
 
-	// the start and finish angles
-	private double startArg;
-	private double finishArg;
+		initializeRouteData();
 
-	public static final double INTEGRAL_STEP = 0.001;
-
-	/** the parameters used to specify the route, @see Spline for example **/
-	protected double[] routeParameters;
-
-	public Route(Point start, Point finish, double startArg, double finishArg, int pointNumber, double... parameters) {
-
-		// initializing class variables
-		this.start = start;
-		this.finish = finish;
-
-		this.startArg = startArg;
-		this.finishArg = finishArg;
-
-		routeParameters = parameters;
-		this.pointsNumber = pointNumber;
-
-		// calculating the axis functions
-		calculateXAndYFunctions();
-		initializeData(pointNumber);
+		return routeData;
 	}
 
-	protected abstract void calculateXAndYFunctions();
+	private static void initializeRouteData() {
+		double s;
+		int n = pointsNumber;
+		routeData = new RoutePoint[pointsNumber + 1];
 
-	/**
-	 * the function receives an axis and returns the relevant data about the axis
-	 * 
-	 * @param axis:
-	 *            the axis the data refers to
-	 * @return: the relevant data of the received axis
-	 */
-	protected double[] getAxisData(Axis axis) {
-		switch (axis) {
-		case X:
-			return getXData();
-		case Y:
-			return getYData();
-		default:
-			System.out.println("ERROR");
-			return null;
+		for (int k = 0; k <= n; k++) {
+			s = (double) k / n;
+			routeData[k] = new RoutePoint(get(s), getArgument(s), getCurrentRadius(s), getDistance(k),
+					getTotalDistance(k));
 		}
-	}
-
-	private double[] getXData() {
-		return new double[] { start.getX(), finish.getX(), Math.cos(startArg), Math.cos(finishArg) };
-	}
-
-	private double[] getYData() {
-		return new double[] { start.getY(), finish.getY(), Math.sin(startArg), Math.sin(finishArg) };
 	}
 
 	//////////////// CONTINOUS ROUTE DATA FUNCTIONS//////////////////////////
@@ -96,7 +56,7 @@ public abstract class Route {
 	 * @return: the point where the route passes at the received s.
 	 */
 
-	public Point get(double s) {
+	private static Point get(double s) {
 		return new Point(xFunction.apply(s), yFunction.apply(s));
 	}
 
@@ -108,7 +68,7 @@ public abstract class Route {
 	 *            the certain s
 	 * @return: the argument, moving from 0 to 2pi
 	 */
-	public double getArgument(double s) {
+	private static double getArgument(double s) {
 
 		// calculating x'(s) and y'(s)
 		double dx = xFunction.getDerivative().apply(s);
@@ -122,7 +82,7 @@ public abstract class Route {
 		return arg;
 	}
 
-	private double getLinearVelocity(double s) {
+	private static double getLinearVelocity(double s) {
 
 		// calculating the derivatives of the axis functions at s
 		double xDiff = xFunction.getDerivative().apply(s);
@@ -134,7 +94,7 @@ public abstract class Route {
 		return result;
 	}
 
-	private double getAngularVelocity(double s) {
+	private static double getAngularVelocity(double s) {
 
 		// calculating first and second derivatives of the axis functions at s
 		double x1 = xFunction.getDerivative().apply(s);
@@ -151,13 +111,13 @@ public abstract class Route {
 		return numerator / denominator;
 	}
 
-	private double getDistance(int k) {
+	private static double getDistance(int k) {
 		if (k == 0)
 			return 0;
-		return Point.distance(data[k], data[k - 1]);
+		return Point.distance(routeData[k], routeData[k - 1]);
 	}
 
-	private double getTotalDistance(int k) {
+	private static double getTotalDistance(int k) {
 		double distance = 0;
 		for (int i = 1; i < k; i++)
 			distance += getDistance(i);
@@ -174,16 +134,8 @@ public abstract class Route {
 	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
 	 *         w- angular velocity)
 	 */
-	private double getCurrentRadius(double s) {
+	private static double getCurrentRadius(double s) {
 		return getLinearVelocity(s) / getAngularVelocity(s);
 	}
 
-	private void initializeData(int n) {
-		double s;
-
-		for (int k = 0; k <= n; k++) {
-			s = (double) k / n;
-			data[k] = new RoutePoint(get(s), getArgument(s), getCurrentRadius(s), getDistance(k), getTotalDistance(k));
-		}
-	}
 }
