@@ -1,7 +1,8 @@
-package routes;
+package routes.routes;
 
 import functions.DifferentiableFunction;
-import utils.ArgPoint;
+import routes.ArgPoint;
+import routes.RouteFunctionData;
 
 /**
  * the class is used to specify a route. it has the start and finish points of

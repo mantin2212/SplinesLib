@@ -1,7 +1,8 @@
-package routes;
+package routes.routes;
 
 import functions.DifferentiableFunction;
-import utils.ArgPoint;
+import routes.ArgPoint;
+import routes.RouteFunctionData;
 import utils.Utils;
 
 public class SplineDescription extends RouteDescription {

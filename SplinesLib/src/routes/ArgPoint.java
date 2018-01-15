@@ -1,4 +1,6 @@
-package utils;
+package routes;
+
+import utils.Point;
 
 public class ArgPoint extends Point {
 

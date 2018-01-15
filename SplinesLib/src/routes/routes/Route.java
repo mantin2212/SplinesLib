@@ -1,9 +1,9 @@
-package routes;
+package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.RouteDescription.Axis;
+import routes.RoutePointData;
+import routes.routes.RouteDescription.Axis;
 import utils.Point;
-import utils.RoutePointData;
 
 /**
  * the class describes a route, going between 2 certain points in which the
