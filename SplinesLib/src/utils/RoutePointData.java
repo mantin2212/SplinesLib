@@ -1,6 +1,6 @@
 package utils;
 
-public class RoutePoint extends Point {
+public class RoutePointData extends Point {
 
 	private final double arg;
 	private final double radius;
@@ -8,7 +8,7 @@ public class RoutePoint extends Point {
 	private final double distance;
 	private final double totalDistance;
 
-	public RoutePoint(Point p, double arg, double radius, double distance, double totalDistance) {
+	public RoutePointData(Point p, double arg, double radius, double distance, double totalDistance) {
 		super(p);
 
 		this.arg = arg;
@@ -18,7 +18,7 @@ public class RoutePoint extends Point {
 		this.totalDistance = totalDistance;
 	}
 
-	public RoutePoint(double x, double y, double arg, double radius, double distance, double totalDistance) {
+	public RoutePointData(double x, double y, double arg, double radius, double distance, double totalDistance) {
 		this(new Point(x, y), arg, radius, distance, totalDistance);
 	}
 

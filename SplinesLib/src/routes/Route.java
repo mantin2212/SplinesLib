@@ -3,7 +3,7 @@ package routes;
 import functions.DifferentiableFunction;
 import routes.RouteDescription.Axis;
 import utils.Point;
-import utils.RoutePoint;
+import utils.RoutePointData;
 
 /**
  * @author noam mantin the class describes a route, going between 2 certain
@@ -17,10 +17,10 @@ public abstract class Route {
 	private static DifferentiableFunction xFunction;
 	private static DifferentiableFunction yFunction;
 
-	private static RoutePoint[] routeData;
+	private static RoutePointData[] routeData;
 	private static int pointsNumber;
 
-	public static RoutePoint[] getRoute(RouteDescription description, int PointNumber) {
+	public static RoutePointData[] getRoute(RouteDescription description, int PointNumber) {
 		xFunction = description.getFunction(Axis.X);
 		yFunction = description.getFunction(Axis.Y);
 
@@ -32,11 +32,11 @@ public abstract class Route {
 	private static void initializeRouteData() {
 		double s;
 		int n = pointsNumber;
-		routeData = new RoutePoint[pointsNumber + 1];
+		routeData = new RoutePointData[pointsNumber + 1];
 
 		for (int k = 0; k <= n; k++) {
 			s = (double) k / n;
-			routeData[k] = new RoutePoint(get(s), getArgument(s), getCurrentRadius(s), getDistance(k),
+			routeData[k] = new RoutePointData(get(s), getArgument(s), getCurrentRadius(s), getDistance(k),
 					getTotalDistance(k));
 		}
 	}
