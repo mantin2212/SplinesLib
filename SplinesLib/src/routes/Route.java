@@ -6,29 +6,55 @@ import utils.Point;
 import utils.RoutePointData;
 
 /**
- * @author noam mantin the class describes a route, going between 2 certain
- *         points in which the angle of the route is known. it uses two
- *         functions- one for each axis. the class uses a variable- s, which
- *         illustrates the progress of the route as a number between 0 to 1
+ * the class describes a route, going between 2 certain points in which the
+ * angle of the route is known. it contains one main static function which
+ * receives the description of a route, and returns the data about each point of
+ * the route, with a received frequency.
+ * 
+ * @author noam mantin
  */
-public abstract class Route {
+public class Route {
 
 	// the following are the x(s) and y(s) functions
 	private static DifferentiableFunction xFunction;
 	private static DifferentiableFunction yFunction;
 
+	// the data of the route, in an array of Points and certain values.
 	private static RoutePointData[] routeData;
+
+	// the frequency of the points the array contains.
 	private static int pointsNumber;
 
-	public static RoutePointData[] getRoute(RouteDescription description, int PointNumber) {
+	/**
+	 * the function receives details which specify a route {@link RouteDescription},
+	 * and returns the data about the route.
+	 * 
+	 * @param description
+	 *            the data which should specify the route.
+	 * @param PointNumber
+	 *            the frequency of the wanted points. also the length of the
+	 *            returned array.
+	 * @return the wanted data about the route, in an array of points
+	 *         {@link RoutePointData}
+	 */
+	public static RoutePointData[] getRoute(RouteDescription description, int pointFrequency) {
+
+		// initializing x and y functions according to the route description
 		xFunction = description.getFunction(Axis.X);
 		yFunction = description.getFunction(Axis.Y);
 
-		initializeRouteData();
+		// initializing point number
+		pointsNumber = pointFrequency;
 
+		// initializing and returning the array
+		initializeRouteData();
 		return routeData;
 	}
 
+	/**
+	 * a function which uses the route data functions in order to initialize the
+	 * data static field of the class.
+	 */
 	private static void initializeRouteData() {
 		double s;
 		int n = pointsNumber;
@@ -36,15 +62,15 @@ public abstract class Route {
 
 		for (int k = 0; k <= n; k++) {
 			s = (double) k / n;
-			routeData[k] = new RoutePointData(get(s), getArgument(s), getCurrentRadius(s), getDistance(k),
+			routeData[k] = new RoutePointData(get(s), getArgument(s), getRadius(s), getDistance(k),
 					getTotalDistance(k));
 		}
 	}
 
 	//////////////// CONTINOUS ROUTE DATA FUNCTIONS//////////////////////////
 	/*
-	 * the following functions receive a certain s and return some data about the
-	 * route at the specific point
+	 * the following functions receive a certain s or k and return some data about
+	 * the route at the specific point
 	 */
 
 	/**
@@ -82,6 +108,15 @@ public abstract class Route {
 		return arg;
 	}
 
+	/**
+	 * the functions calculates and returns the linear velocity (relative to s) in a
+	 * certain s.
+	 * 
+	 * @param s
+	 *            the certain s.
+	 * @return the linear velocity of the route at that s, which is equal to
+	 *         sqrt(x'^2+y'^2)
+	 */
 	private static double getLinearVelocity(double s) {
 
 		// calculating the derivatives of the axis functions at s
@@ -94,6 +129,15 @@ public abstract class Route {
 		return result;
 	}
 
+	/**
+	 * the functions calculates and returns the angular velocity (relative to s) in
+	 * a certain s.
+	 * 
+	 * @param s
+	 *            the certain s.
+	 * @return the angular velocity of the route at that s, which is equal to
+	 *         (x'^2+y'^2)/(y''x'-x''y')
+	 */
 	private static double getAngularVelocity(double s) {
 
 		// calculating first and second derivatives of the axis functions at s
@@ -111,12 +155,29 @@ public abstract class Route {
 		return numerator / denominator;
 	}
 
+	/**
+	 * the function calculates and returns the distance between two adjacent (TODO
+	 * is that use of the word OK? ) points of the route.
+	 * 
+	 * @param k
+	 *            the index of the second of the two points.
+	 * @return the distance between the two points.
+	 */
 	private static double getDistance(int k) {
 		if (k == 0)
 			return 0;
-		return Point.distance(routeData[k], routeData[k - 1]);
+		// the points are in the middle of the route
+		return Point.distance(get((double) k / pointsNumber), get((double) (k - 1) / pointsNumber));
 	}
 
+	/**
+	 * the function calculates and returns the total distance, from start to a
+	 * certain point, on the route.
+	 * 
+	 * @param k
+	 *            the index of the certain point.
+	 * @return the total distance (on the route) from start to the k'th point.
+	 */
 	private static double getTotalDistance(int k) {
 		double distance = 0;
 		for (int i = 1; i < k; i++)
@@ -134,7 +195,7 @@ public abstract class Route {
 	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
 	 *         w- angular velocity)
 	 */
-	private static double getCurrentRadius(double s) {
+	private static double getRadius(double s) {
 		return getLinearVelocity(s) / getAngularVelocity(s);
 	}
 

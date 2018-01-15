@@ -3,6 +3,14 @@ package routes;
 import functions.DifferentiableFunction;
 import utils.ArgPoint;
 
+/**
+ * the class is used to specify a route. it has the start and finish points of
+ * the route, and uses two functions, one for each axis. the class uses a
+ * variable- s, which illustrates the progress of the route as a number between
+ * 0 to 1.
+ * 
+ * @author noam mantin
+ */
 public abstract class RouteDescription {
 
 	public enum Axis {
