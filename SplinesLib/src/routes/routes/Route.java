@@ -19,9 +19,6 @@ public class Route {
 	private static DifferentiableFunction xFunction;
 	private static DifferentiableFunction yFunction;
 
-	// the data of the route, in an array of Points and certain values.
-	private static RoutePointData[] routeData;
-
 	// the frequency of the points the array contains.
 	private static int pointsNumber;
 
@@ -46,25 +43,25 @@ public class Route {
 		// initializing point number
 		pointsNumber = pointFrequency;
 
-		// initializing and returning the array
-		initializeRouteData();
-		return routeData;
+		// getting and returning the array
+		return getRouteData();
 	}
 
 	/**
 	 * a function which uses the route data functions in order to initialize the
 	 * data static field of the class.
 	 */
-	private static void initializeRouteData() {
+	private static RoutePointData[] getRouteData() {
 		double s;
 		int n = pointsNumber;
-		routeData = new RoutePointData[pointsNumber + 1];
+		RoutePointData[] routeData = new RoutePointData[pointsNumber + 1];
 
-		for (int k = 0; k <= n; k++) {
-			s = (double) k / n;
-			routeData[k] = new RoutePointData(get(s), getArgument(s), getRadius(s), getDistance(k),
-					getTotalDistance(k));
+		for (int i = 0; i <= n; i++) {
+			s = (double) i / n;
+			routeData[i] = new RoutePointData(get(s), getArgument(s), getRadius(s), getDistance(i),
+					getTotalDistance(i));
 		}
+		return routeData;
 	}
 
 	//////////////// CONTINOUS ROUTE DATA FUNCTIONS//////////////////////////
@@ -156,6 +153,20 @@ public class Route {
 	}
 
 	/**
+	 * the function calculates the radius of the imaginary circle the route
+	 * approximates at a certain s
+	 * 
+	 * @param s
+	 *            the certain s
+	 * @return the radius of the circle. the route at that point is approximately a
+	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
+	 *         w- angular velocity)
+	 */
+	private static double getRadius(double s) {
+		return getLinearVelocity(s) / getAngularVelocity(s);
+	}
+
+	/**
 	 * the function calculates and returns the distance between two adjacent (TODO
 	 * is that use of the word OK? ) points of the route.
 	 * 
@@ -184,19 +195,4 @@ public class Route {
 			distance += getDistance(i);
 		return distance;
 	}
-
-	/**
-	 * the function calculates the radius of the imaginary circle the route
-	 * approximates at a certain s
-	 * 
-	 * @param s
-	 *            the certain s
-	 * @return the radius of the circle. the route at that point is approximately a
-	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
-	 *         w- angular velocity)
-	 */
-	private static double getRadius(double s) {
-		return getLinearVelocity(s) / getAngularVelocity(s);
-	}
-
 }

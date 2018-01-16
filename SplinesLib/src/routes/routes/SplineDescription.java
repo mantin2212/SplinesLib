@@ -14,6 +14,10 @@ import utils.Utils;
  */
 public class SplineDescription extends RouteDescription {
 
+	/*
+	 * Route.getRoute(new SplineDescription(start,target,k),n);
+	 */
+
 	// k is a constant of the route, which determines the curvature of the route.
 	private double k;
 
@@ -30,7 +34,6 @@ public class SplineDescription extends RouteDescription {
 	}
 
 	private void updateDerivatives(RouteFunctionData data) {
-
 		data.setDerivativeAt0(data.getDerivativeAt0() * k);
 		data.setDerivativeAt1(data.getDerivativeAt1() * k);
 	}

@@ -91,5 +91,4 @@ public abstract class RouteDescription {
 		return new RouteFunctionData(start.getY(), finish.getY(), Math.sin(start.getAngle()),
 				Math.sin(finish.getAngle()));
 	}
-
 }
