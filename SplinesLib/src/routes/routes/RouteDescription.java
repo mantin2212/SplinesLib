@@ -86,7 +86,6 @@ public abstract class RouteDescription {
 	 * 
 	 * @return a {@link RouteFunctionData} object which contains the mentioned data.
 	 */
-
 	private RouteFunctionData getYData() {
 		return new RouteFunctionData(start.getY(), finish.getY(), Math.sin(start.getAngle()),
 				Math.sin(finish.getAngle()));

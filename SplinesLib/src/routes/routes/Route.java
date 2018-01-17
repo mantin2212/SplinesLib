@@ -190,7 +190,9 @@ public class Route {
 	 * @return the total distance (on the route) from start to the k'th point.
 	 */
 	private static double getTotalDistance(int k) {
+
 		double distance = 0;
+
 		for (int i = 1; i < k; i++)
 			distance += getDistance(i);
 		return distance;
