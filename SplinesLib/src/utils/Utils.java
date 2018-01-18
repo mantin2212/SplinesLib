@@ -60,4 +60,9 @@ public class Utils {
 		System.out.println(result);
 		return result;
 	}
+
+	public static double getSpeedWithConstantAcceleration(double acceleration, double initSpeed, double distance) {
+		return Math.sqrt(initSpeed * initSpeed + 2 * acceleration * distance);
+	}
+
 }
