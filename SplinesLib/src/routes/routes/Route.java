@@ -163,7 +163,10 @@ public class Route {
 	 *         w- angular velocity)
 	 */
 	private static double getRadius(double s) {
-		return getLinearVelocity(s) / getAngularVelocity(s);
+		if (getAngularVelocity(s) == 0)// the route goes straight
+			return 0;
+		else
+			return getLinearVelocity(s) / getAngularVelocity(s);
 	}
 
 	/**
