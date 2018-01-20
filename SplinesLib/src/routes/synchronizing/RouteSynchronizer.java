@@ -13,14 +13,36 @@ public abstract class RouteSynchronizer {
 	}
 
 	public RouteSynchronizer(RoutePointData[] route, double robotWidth) {
+
 		this.robotWidth = robotWidth;
 
 		routeData = route;
 	}
 
-	protected abstract double getTime(int k);
+	protected double getTime(int index) {
 
-	protected abstract double getLinearSpeed(int k);
+		if (index < 0 || index >= routeData.length) {
+
+			System.out.println("ERROR");
+			return 0;
+
+		} else if (index == 0)
+			return 0;
+
+		else {
+			double v0 = getLinearSpeed(index - 1);
+
+			double v1 = getLinearSpeed(index);
+
+			double distance = routeData[index].getDistance();
+
+			double avgSpeed = (v0 + v1) / 2;
+
+			return distance / avgSpeed;
+		}
+	}
+
+	protected abstract double getLinearSpeed(int index);
 
 	public double getSpeed(Side side, double time) {
 		switch (side) {
@@ -35,43 +57,34 @@ public abstract class RouteSynchronizer {
 	}
 
 	private double getRightSpeed(double time) {
-		int k = getK(time);
+		int index = getIndex(time);
 
-		double radius = routeData[k].getRadius();
+		double radius = routeData[index].getRadius();
 
-		return ((radius - robotWidth / 2) / radius) * getLinearSpeed(k);
+		return ((radius - robotWidth / 2) / radius) * getLinearSpeed(index);
 	}
 
 	private double getLeftSpeed(double time) {
-		int k = getK(time);
+		int index = getIndex(time);
 
-		double radius = routeData[k].getRadius();
+		double radius = routeData[index].getRadius();
 
-		return ((radius + robotWidth / 2) / radius) * getLinearSpeed(k);
+		return ((radius + robotWidth / 2) / radius) * getLinearSpeed(index);
 	}
 
-	private double getTotalTime(int k) {
-
-		double totalTime = 0;
-
-		for (int i = 0; i <= k; i++)
-			totalTime += getTime(k);
-
-		return totalTime;
-	}
-
-	private int getK(double time) {
+	private int getIndex(double time) {
 		if (time < 0) {
 			System.out.println("ERROR");
 			return 0;
 		} else {
 
-			double totalTime;
+			double totalTime = 0;
 
-			for (int k = 0; k < routeData.length; k++) {
-				totalTime = getTotalTime(k);
+			for (int i = 0; i < routeData.length; i++) {
+				totalTime += getTime(i);
+
 				if (totalTime >= time)
-					return k;
+					return i;
 			}
 			return 0;
 		}
