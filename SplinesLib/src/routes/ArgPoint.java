@@ -27,6 +27,10 @@ public class ArgPoint extends Point {
 		this.angle = angle;
 	}
 
+	public ArgPoint(ArgPoint ap) {
+		this(new Point(ap.getX(), ap.getY()), ap.angle);
+	}
+
 	public double getAngle() {
 		return angle;
 	}
