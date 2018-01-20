@@ -61,7 +61,12 @@ public abstract class RouteSynchronizer {
 
 		double radius = routeData[index].getRadius();
 
-		return ((radius - robotWidth / 2) / radius) * getLinearSpeed(index);
+		double linearSpeed = getLinearSpeed(index);
+
+		if (radius == 0)
+			return linearSpeed;
+		else
+			return ((radius - robotWidth / 2) / radius) * linearSpeed;
 	}
 
 	private double getLeftSpeed(double time) {
@@ -69,7 +74,12 @@ public abstract class RouteSynchronizer {
 
 		double radius = routeData[index].getRadius();
 
-		return ((radius + robotWidth / 2) / radius) * getLinearSpeed(index);
+		double linearSpeed = getLinearSpeed(index);
+
+		if (radius == 0)
+			return linearSpeed;
+		else
+			return ((radius + robotWidth / 2) / radius) * linearSpeed;
 	}
 
 	private int getIndex(double time) {

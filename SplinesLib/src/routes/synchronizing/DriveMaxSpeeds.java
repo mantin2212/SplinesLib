@@ -19,6 +19,11 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 		initializeSpeeds();
 	}
 
+	@Override
+	protected double getLinearSpeed(int index) {
+		return maxSpeeds[index];
+	}
+
 	public void initializeSpeeds() {
 
 		maxSpeeds = new double[routeData.length];
@@ -30,14 +35,21 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 	}
 
 	private double getMaxSpeed(double radius) {
+		if (radius == 0)
+			return maxVelocity;
+		else {
+			double absoluteRadius = Math.abs(radius);
 
-		double absoluteRadius = Math.abs(radius);
-
-		return absoluteRadius / (absoluteRadius + robotWidth / 2) * maxVelocity;
-
+			return absoluteRadius / (absoluteRadius + robotWidth / 2) * maxVelocity;
+		}
 	}
 
 	private void fixAcceleration() {
+		fixPositiveAcceleration();
+		fixNegativeAcceleration();
+	}
+
+	private void fixPositiveAcceleration() {
 		maxSpeeds[0] = 0;
 
 		double distance;
@@ -48,6 +60,10 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
 					Utils.getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k - 1], distance));
 		}
+	}
+
+	private void fixNegativeAcceleration() {
+		double distance;
 
 		maxSpeeds[maxSpeeds.length - 1] = 0;
 
@@ -58,23 +74,4 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 					Utils.getSpeedWithConstantAcceleration(-maxAcceleration, maxSpeeds[k + 1], distance));
 		}
 	}
-
-	@Override
-	protected double getTime(int k) {
-		/*
-		 * if (k == 0) return 0; else {
-		 * 
-		 * if (getAcceleration(k) == 0) return routeData[k].getDistance() /
-		 * maxSpeeds[k]; else return (maxSpeeds[k] - maxSpeeds[k - 1]) /
-		 * getAcceleration(k); }
-		 */
-		// TODO implement this method
-		return 0;
-	}
-
-	@Override
-	protected double getLinearSpeed(int k) {
-		return maxSpeeds[k];
-	}
-
 }
