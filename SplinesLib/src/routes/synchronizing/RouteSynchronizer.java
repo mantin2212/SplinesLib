@@ -197,4 +197,14 @@ public abstract class RouteSynchronizer {
 			return 0;
 		}
 	}
+
+	public boolean isFinished(double time) {
+
+		double totalTime = 0;
+
+		for (int i = 0; i < routeData.length; i++)
+			totalTime += getTime(i);
+
+		return (time >= totalTime);
+	}
 }
