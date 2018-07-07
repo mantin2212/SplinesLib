@@ -120,7 +120,7 @@ public abstract class RouteSynchronizer {
 		 * calculating the radius of the robot movement, and the linear speed, at the
 		 * certain point
 		 */
-		double radius = routeData[index].getRadius();
+		double radius = routeData[index].getRotationRadius();
 		double linearSpeed = getLinearSpeed(index);
 
 		if (radius == 0)
@@ -152,7 +152,7 @@ public abstract class RouteSynchronizer {
 		 * calculating the radius of the robot movement, and the linear speed, at the
 		 * certain point
 		 */
-		double radius = routeData[index].getRadius();
+		double radius = routeData[index].getRotationRadius();
 		double linearSpeed = getLinearSpeed(index);
 
 		if (radius == 0)

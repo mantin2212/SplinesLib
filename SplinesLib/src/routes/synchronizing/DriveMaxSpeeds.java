@@ -29,7 +29,7 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 		maxSpeeds = new double[routeData.length];
 
 		for (int i = 0; i < maxSpeeds.length; i++)
-			maxSpeeds[i] = Math.min(maxVelocity, getMaxSpeed(routeData[i].getRadius()));
+			maxSpeeds[i] = Math.min(maxVelocity, getMaxSpeed(routeData[i].getRotationRadius()));
 
 		fixAcceleration();
 	}
