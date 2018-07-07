@@ -65,6 +65,10 @@ public class RouteDataPoint {
 		this(new Point(x, y), arg, radius, distance, totalDistance);
 	}
 
+	public Point getPosition() {
+		return position;
+	}
+
 	public double getDistance() {
 		return distance;
 	}
