@@ -13,13 +13,13 @@ import utils.Point;
  * @author noam mantin
  *
  */
-public class ArgPoint extends Point {
+public class Position2D extends Point {
 
 	// the yaw angle of the point
 	private double yawAngle;
 
 	/**
-	 * creates a new {@link ArgPoint} object, with specific x,y values and a given
+	 * creates a new {@link Position2D} object, with specific x,y values and a given
 	 * angle.
 	 *
 	 * @param x
@@ -29,31 +29,31 @@ public class ArgPoint extends Point {
 	 * @param yaw
 	 *            the wanted angle.
 	 */
-	public ArgPoint(double x, double y, double yaw) {
+	public Position2D(double x, double y, double yaw) {
 		super(x, y);
 		this.yawAngle = yaw;
 	}
 
 	/**
-	 * creates a new {@link ArgPoint} object, with given point and angle.
+	 * creates a new {@link Position2D} object, with given point and angle.
 	 *
 	 * @param p
 	 *            the physical point of the object
 	 * @param yaw
 	 *            the wanted angle.
 	 */
-	public ArgPoint(Point p, double yaw) {
+	public Position2D(Point p, double yaw) {
 		super(p);
 		this.yawAngle = yaw;
 	}
 
 	/**
-	 * copies a given {@link ArgPoint} object's properties into this one.
+	 * copies a given {@link Position2D} object's properties into this one.
 	 *
 	 * @param ap
 	 *            the position of the object.
 	 */
-	public ArgPoint(ArgPoint ap) {
+	public Position2D(Position2D ap) {
 		this(new Point(ap.getX(), ap.getY()), ap.yawAngle);
 	}
 

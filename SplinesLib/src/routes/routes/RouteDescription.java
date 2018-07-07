@@ -1,7 +1,7 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.ArgPoint;
+import routes.Position2D;
 import routes.RouteFunctionData;
 
 /**
@@ -26,8 +26,8 @@ public abstract class RouteDescription {
 	}
 
 	// the start and finish points of the route
-	private ArgPoint start;
-	private ArgPoint finish;
+	private Position2D start;
+	private Position2D finish;
 
 	/**
 	 * the function builds a new {@link RouteDescription} object, with received
@@ -38,7 +38,7 @@ public abstract class RouteDescription {
 	 * @param finish
 	 *            the point which should be the end of the route.
 	 */
-	public RouteDescription(ArgPoint start, ArgPoint finish) {
+	public RouteDescription(Position2D start, Position2D finish) {
 		this.start = start;
 		this.finish = finish;
 	}

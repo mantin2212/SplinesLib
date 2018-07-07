@@ -1,7 +1,7 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.ArgPoint;
+import routes.Position2D;
 import routes.RouteFunctionData;
 import utils.Utils;
 
@@ -24,7 +24,7 @@ public class SplineDescription extends RouteDescription {
 	 * @param finish
 	 * @param k
 	 */
-	public SplineDescription(ArgPoint start, ArgPoint finish, double k) {
+	public SplineDescription(Position2D start, Position2D finish, double k) {
 		super(start, finish);
 		this.k = k;
 	}
