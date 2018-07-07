@@ -1,8 +1,8 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
+import functions.PolynomialFunction;
 import routes.utils.Position2D;
-import utils.Utils;
 
 /**
  * an implementation of {@link RouteDescription}. uses 3rd degree polynomial
@@ -34,15 +34,44 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 
 	@Override
 	public DifferentiableFunction getXFunction() {
-
-		return Utils.calculate3degreePolinom(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
+		return calculate3degreePolinom(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
 				k * Math.cos(finish.getYaw()));
 	}
 
 	@Override
 	public DifferentiableFunction getYFunction() {
-		return Utils.calculate3degreePolinom(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
+		return calculate3degreePolinom(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
 				k * Math.sin(finish.getYaw()));
 	}
 
+	/**
+	 * calculates and returns a polynomial function of degree 3 (as^3+vs^2+cs+d
+	 * function) according to a given set of properties of the wanted function.
+	 * 
+	 * @param valueAt0
+	 *            the value of the function at 0
+	 * @param valueAt1
+	 *            the value of the function at 1
+	 * @param derivativeAt0
+	 *            the derivative of the function at 0
+	 * @param derivativeAt1
+	 *            the derivative of the function at 1
+	 * @return: the polynomial function which should fulfill the conditions above
+	 */
+	private PolynomialFunction calculate3degreePolinom(double valueAt0, double valueAt1, double derivativeAt0,
+			double derivativeAt1) {
+		// calculating as^3+vs^2+cs+d function
+
+		double totalDiff = valueAt1 - valueAt0;
+
+		double a = derivativeAt0 + derivativeAt1 - 2 * totalDiff;
+
+		double b = 3 * totalDiff - 2 * derivativeAt0 - derivativeAt1;
+
+		double c = derivativeAt0;
+
+		double d = valueAt0;
+
+		return new PolynomialFunction(d, c, b, a);
+	}
 }

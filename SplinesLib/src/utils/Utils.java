@@ -2,36 +2,7 @@ package utils;
 
 import java.util.function.Function;
 
-import functions.PolynomialFunction;
-
 public class Utils {
-
-	/**
-	 * the function calculates and returns a polynomial function of degree 3
-	 * (as^3+vs^2+cs+d function) according to a result set received
-	 * 
-	 * @param results:
-	 *            should contain 4 elements, in that order: the value of the
-	 *            function at 0, the value of the function at 1, the derivative of
-	 *            the function at 0, and the derivative of the function at 1
-	 * @return: the polynomial function which should fulfill the conditions above
-	 */
-	public static PolynomialFunction calculate3degreePolinom(double valueAt0, double valueAt1, double derivativeAt0, double derivativeAt1) {
-		// calculating as^3+vs^2+cs+d function
-
-		double totalDiff = valueAt1 - valueAt0;
-
-		double a = derivativeAt0 + derivativeAt1 - 2 * totalDiff;
-
-		double b = 3 * totalDiff - 2 * derivativeAt0 - derivativeAt1;
-
-		double c = derivativeAt0;
-
-		double d = valueAt0;
-
-		return new PolynomialFunction(d, c, b, a);
-	}
-
 	/**
 	 * the function approximates the definitive integral of a received function, in
 	 * a specific interval
