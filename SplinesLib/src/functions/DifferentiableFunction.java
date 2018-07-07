@@ -35,5 +35,4 @@ public abstract class DifferentiableFunction implements Function<Double, Double>
 		} else
 			return getDerivative(index - 1).getDerivative();
 	}
-
 }
