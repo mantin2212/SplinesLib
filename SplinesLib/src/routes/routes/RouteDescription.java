@@ -2,7 +2,7 @@ package routes.routes;
 
 import functions.DifferentiableFunction;
 import routes.utils.Position2D;
-import routes.utils.RouteFunctionData;
+import routes.utils.FunctionEdgesInfo;
 
 /**
  * the class is used to specify a route. it has the start and finish points of
@@ -59,7 +59,7 @@ public abstract class RouteDescription {
 	 *            the axis the data refers to
 	 * @return: the relevant data of the received axis
 	 */
-	protected RouteFunctionData getAxisData(Axis axis) {
+	protected FunctionEdgesInfo getAxisData(Axis axis) {
 		switch (axis) {
 		case X:
 			return getXData();
@@ -74,18 +74,18 @@ public abstract class RouteDescription {
 	/**
 	 * returns the function data which is relevant to the X axis.
 	 * 
-	 * @return a {@link RouteFunctionData} object which contains the mentioned data.
+	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
 	 */
-	private RouteFunctionData getXData() {
-		return new RouteFunctionData(start.getX(), finish.getX(), Math.cos(start.getYaw()), Math.cos(finish.getYaw()));
+	private FunctionEdgesInfo getXData() {
+		return new FunctionEdgesInfo(start.getX(), finish.getX(), Math.cos(start.getYaw()), Math.cos(finish.getYaw()));
 	}
 
 	/**
 	 * returns the function data which is relevant to the Y axis.
 	 * 
-	 * @return a {@link RouteFunctionData} object which contains the mentioned data.
+	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
 	 */
-	private RouteFunctionData getYData() {
-		return new RouteFunctionData(start.getY(), finish.getY(), Math.sin(start.getYaw()), Math.sin(finish.getYaw()));
+	private FunctionEdgesInfo getYData() {
+		return new FunctionEdgesInfo(start.getY(), finish.getY(), Math.sin(start.getYaw()), Math.sin(finish.getYaw()));
 	}
 }

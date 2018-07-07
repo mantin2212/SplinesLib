@@ -2,7 +2,7 @@ package routes.routes;
 
 import functions.DifferentiableFunction;
 import routes.utils.Position2D;
-import routes.utils.RouteFunctionData;
+import routes.utils.FunctionEdgesInfo;
 import utils.Utils;
 
 /**
@@ -30,12 +30,12 @@ public class SplineDescription extends RouteDescription {
 	}
 
 	/**
-	 * multiplies the derivatives of a {@link RouteFunctionData} object by k
+	 * multiplies the derivatives of a {@link FunctionEdgesInfo} object by k
 	 * 
 	 * @param data
 	 *            the specific object
 	 */
-	private void updateDerivatives(RouteFunctionData data) {
+	private void updateDerivatives(FunctionEdgesInfo data) {
 		data.setDerivativeAt0(data.getDerivativeAt0() * k);
 		data.setDerivativeAt1(data.getDerivativeAt1() * k);
 	}
@@ -43,7 +43,7 @@ public class SplineDescription extends RouteDescription {
 	@Override
 	public DifferentiableFunction getFunction(Axis axis) {
 
-		RouteFunctionData result = getAxisData(axis);
+		FunctionEdgesInfo result = getAxisData(axis);
 
 		updateDerivatives(result);
 

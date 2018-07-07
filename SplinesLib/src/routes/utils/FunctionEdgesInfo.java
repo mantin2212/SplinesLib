@@ -7,7 +7,7 @@ package routes.utils;
  * 
  * @author noam mantin
  */
-public class RouteFunctionData {
+public class FunctionEdgesInfo {
 
 	/**
 	 * the values of the function at x=0,1
@@ -22,7 +22,7 @@ public class RouteFunctionData {
 	private double derivativeAt1;
 
 	/**
-	 * creates a new {@link RouteFunctionData} object, with received values
+	 * creates a new {@link FunctionEdgesInfo} object, with received values
 	 * 
 	 * @param functionAt0
 	 *            the value of the specified function at x=0
@@ -33,7 +33,7 @@ public class RouteFunctionData {
 	 * @param derivativeAt1
 	 *            the derivative of the specified function at x=1
 	 */
-	public RouteFunctionData(double functionAt0, double functionAt1, double derivativeAt0, double derivativeAt1) {
+	public FunctionEdgesInfo(double functionAt0, double functionAt1, double derivativeAt0, double derivativeAt1) {
 		//
 		this.functionAt0 = functionAt0;
 		this.functionAt1 = functionAt1;
