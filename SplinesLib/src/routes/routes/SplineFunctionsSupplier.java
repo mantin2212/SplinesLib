@@ -34,13 +34,13 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 
 	@Override
 	public DifferentiableFunction getXFunction() {
-		return calculate3degreePolinom(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
+		return calculate3degreePolynomial(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
 				k * Math.cos(finish.getYaw()));
 	}
 
 	@Override
 	public DifferentiableFunction getYFunction() {
-		return calculate3degreePolinom(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
+		return calculate3degreePolynomial(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
 				k * Math.sin(finish.getYaw()));
 	}
 
@@ -58,7 +58,7 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	 *            the derivative of the function at 1
 	 * @return: the polynomial function which should fulfill the conditions above
 	 */
-	private PolynomialFunction calculate3degreePolinom(double valueAt0, double valueAt1, double derivativeAt0,
+	private PolynomialFunction calculate3degreePolynomial(double valueAt0, double valueAt1, double derivativeAt0,
 			double derivativeAt1) {
 		// calculating as^3+vs^2+cs+d function
 
