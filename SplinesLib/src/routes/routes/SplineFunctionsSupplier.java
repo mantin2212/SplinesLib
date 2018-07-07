@@ -7,14 +7,14 @@ import routes.utils.Position2D;
 /**
  * an implementation of {@link RouteDescription}. uses 3rd degree polynomial
  * functions as axis functions.
- * 
- * @author noam mantin
  *
+ * @author noam mantin
  */
 public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 
 	// k is a constant of the route, which determines the curvature of the route.
 	private double k;
+	// start and finish points
 	private Position2D start;
 	private Position2D finish;
 
