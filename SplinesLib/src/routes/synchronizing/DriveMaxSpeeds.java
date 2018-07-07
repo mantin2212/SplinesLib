@@ -1,6 +1,6 @@
 package routes.synchronizing;
 
-import routes.RoutePointData;
+import routes.RouteDataPoint;
 import utils.Utils;
 
 public class DriveMaxSpeeds extends RouteSynchronizer {
@@ -10,7 +10,7 @@ public class DriveMaxSpeeds extends RouteSynchronizer {
 
 	private double[] maxSpeeds;
 
-	public DriveMaxSpeeds(RoutePointData[] route, double robotWidth, double maxVelocity, double maxAcceleration) {
+	public DriveMaxSpeeds(RouteDataPoint[] route, double robotWidth, double maxVelocity, double maxAcceleration) {
 		super(route, robotWidth);
 
 		this.maxVelocity = maxVelocity;

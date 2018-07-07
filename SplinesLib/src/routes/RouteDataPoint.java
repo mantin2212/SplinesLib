@@ -2,7 +2,7 @@ package routes;
 
 import utils.Point;
 
-public class RoutePointData extends Point {
+public class RouteDataPoint extends Point {
 
 	private final double arg;
 	private final double radius;
@@ -10,7 +10,7 @@ public class RoutePointData extends Point {
 	private final double distance;
 	private final double totalDistance;
 
-	public RoutePointData(Point p, double arg, double radius, double distance, double totalDistance) {
+	public RouteDataPoint(Point p, double arg, double radius, double distance, double totalDistance) {
 		super(p);
 
 		this.arg = arg;
@@ -20,7 +20,7 @@ public class RoutePointData extends Point {
 		this.totalDistance = totalDistance;
 	}
 
-	public RoutePointData(double x, double y, double arg, double radius, double distance, double totalDistance) {
+	public RouteDataPoint(double x, double y, double arg, double radius, double distance, double totalDistance) {
 		this(new Point(x, y), arg, radius, distance, totalDistance);
 	}
 

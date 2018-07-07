@@ -6,7 +6,6 @@ package routes;
  * derivative at x=0,1.
  * 
  * @author noam mantin
- *
  */
 public class RouteFunctionData {
 
