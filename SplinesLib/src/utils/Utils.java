@@ -2,7 +2,7 @@ package utils;
 
 import java.util.function.Function;
 
-import functions.Polynom;
+import functions.PolynomialFunction;
 import routes.RouteFunctionData;
 
 public class Utils {
@@ -17,7 +17,7 @@ public class Utils {
 	 *            the function at 0, and the derivative of the function at 1
 	 * @return: the polynomial function which should fulfill the conditions above
 	 */
-	public static Polynom calculate3degreePolinom(RouteFunctionData data) {
+	public static PolynomialFunction calculate3degreePolinom(RouteFunctionData data) {
 		// calculating as^3+vs^2+cs+d function
 
 		double totalDiff = data.getFunctionAt1() - data.getFunctionAt0();
@@ -30,7 +30,7 @@ public class Utils {
 
 		double d = data.getFunctionAt0();
 
-		return new Polynom(d, c, b, a);
+		return new PolynomialFunction(d, c, b, a);
 	}
 
 	/**

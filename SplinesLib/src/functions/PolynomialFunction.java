@@ -1,11 +1,11 @@
 package functions;
 
-public class Polynom extends DifferentiableFunction {
+public class PolynomialFunction extends DifferentiableFunction {
 
 	// the Coefficients of the polynomial function
 	private double[] elements;
 
-	public Polynom(double... elements) {
+	public PolynomialFunction(double... elements) {
 		this.elements = elements;
 	}
 
@@ -25,14 +25,14 @@ public class Polynom extends DifferentiableFunction {
 		return result;
 	}
 
-	public Polynom getDerivative() {
+	public PolynomialFunction getDerivative() {
 		double[] diffElements = new double[elements.length - 1];
 
 		for (int i = 0; i < diffElements.length; i++) {
 			diffElements[i] = (i + 1) * elements[i + 1];
 		}
 
-		Polynom result = new Polynom(diffElements);
+		PolynomialFunction result = new PolynomialFunction(diffElements);
 
 		return result;
 	}
