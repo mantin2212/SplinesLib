@@ -1,4 +1,4 @@
-package routes;
+package routes.utils;
 
 import routes.routes.Route;
 import utils.Point;

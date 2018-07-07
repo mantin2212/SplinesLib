@@ -1,6 +1,6 @@
 package routes.synchronizing;
 
-import routes.RoutePointInfo;
+import routes.utils.RoutePointInfo;
 
 /**
  * the class helps to synchronize a robot's movement with a route. it has an

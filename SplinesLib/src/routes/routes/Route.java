@@ -1,8 +1,8 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.RoutePointInfo;
 import routes.routes.RouteDescription.Axis;
+import routes.utils.RoutePointInfo;
 import utils.Point;
 
 /**

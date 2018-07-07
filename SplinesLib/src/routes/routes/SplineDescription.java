@@ -1,8 +1,8 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.Position2D;
-import routes.RouteFunctionData;
+import routes.utils.Position2D;
+import routes.utils.RouteFunctionData;
 import utils.Utils;
 
 /**

@@ -1,4 +1,4 @@
-package routes;
+package routes.utils;
 
 /**
  * the class describes the data needed to specify a 3rd degree polynomial

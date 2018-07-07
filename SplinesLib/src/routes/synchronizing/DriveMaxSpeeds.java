@@ -1,6 +1,6 @@
 package routes.synchronizing;
 
-import routes.RoutePointInfo;
+import routes.utils.RoutePointInfo;
 import utils.Utils;
 
 public class DriveMaxSpeeds extends RouteSynchronizer {

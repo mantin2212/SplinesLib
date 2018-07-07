@@ -3,7 +3,7 @@ package utils;
 import java.util.function.Function;
 
 import functions.PolynomialFunction;
-import routes.RouteFunctionData;
+import routes.utils.RouteFunctionData;
 
 public class Utils {
 
