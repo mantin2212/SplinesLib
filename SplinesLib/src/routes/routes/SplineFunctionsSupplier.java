@@ -1,7 +1,6 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.utils.FunctionEdgesInfo;
 import routes.utils.Position2D;
 import utils.Utils;
 
@@ -35,35 +34,15 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 
 	@Override
 	public DifferentiableFunction getXFunction() {
-		FunctionEdgesInfo result = getXAxisData();
 
-		return Utils.calculate3degreePolinom(result);
+		return Utils.calculate3degreePolinom(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
+				k * Math.cos(finish.getYaw()));
 	}
 
 	@Override
 	public DifferentiableFunction getYFunction() {
-		FunctionEdgesInfo result = getYAxisData();
-
-		return Utils.calculate3degreePolinom(result);
-	}
-
-	/**
-	 * returns the function data which is relevant to the X axis.
-	 * 
-	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
-	 */
-	private FunctionEdgesInfo getXAxisData() {
-		return new FunctionEdgesInfo(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
-				k * Math.cos(finish.getYaw()));
-	}
-
-	/**
-	 * returns the function data which is relevant to the Y axis.
-	 * 
-	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
-	 */
-	private FunctionEdgesInfo getYAxisData() {
-		return new FunctionEdgesInfo(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
+		return Utils.calculate3degreePolinom(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
 				k * Math.sin(finish.getYaw()));
 	}
+
 }

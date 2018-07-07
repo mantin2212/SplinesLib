@@ -3,7 +3,6 @@ package utils;
 import java.util.function.Function;
 
 import functions.PolynomialFunction;
-import routes.utils.FunctionEdgesInfo;
 
 public class Utils {
 
@@ -17,18 +16,18 @@ public class Utils {
 	 *            the function at 0, and the derivative of the function at 1
 	 * @return: the polynomial function which should fulfill the conditions above
 	 */
-	public static PolynomialFunction calculate3degreePolinom(FunctionEdgesInfo data) {
+	public static PolynomialFunction calculate3degreePolinom(double valueAt0, double valueAt1, double derivativeAt0, double derivativeAt1) {
 		// calculating as^3+vs^2+cs+d function
 
-		double totalDiff = data.getFunctionAt1() - data.getFunctionAt0();
+		double totalDiff = valueAt1 - valueAt0;
 
-		double a = data.getDerivativeAt0() + data.getDerivativeAt1() - 2 * totalDiff;
+		double a = derivativeAt0 + derivativeAt1 - 2 * totalDiff;
 
-		double b = 3 * totalDiff - 2 * data.getDerivativeAt0() - data.getDerivativeAt1();
+		double b = 3 * totalDiff - 2 * derivativeAt0 - derivativeAt1;
 
-		double c = data.getDerivativeAt0();
+		double c = derivativeAt0;
 
-		double d = data.getFunctionAt0();
+		double d = valueAt0;
 
 		return new PolynomialFunction(d, c, b, a);
 	}
