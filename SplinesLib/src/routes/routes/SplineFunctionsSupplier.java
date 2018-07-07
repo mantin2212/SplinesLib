@@ -56,7 +56,7 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	 *            the derivative of the function at 0
 	 * @param derivativeAt1
 	 *            the derivative of the function at 1
-	 * @return: the polynomial function which should fulfill the conditions above
+	 * @return: the polynomial function which should fit the given conditions.
 	 */
 	private PolynomialFunction calculate3degreePolynomial(double valueAt0, double valueAt1, double derivativeAt0,
 			double derivativeAt1) {
