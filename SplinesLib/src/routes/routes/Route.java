@@ -1,7 +1,6 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.routes.RouteDescription.Axis;
 import routes.utils.RoutePointInfo;
 import utils.Point;
 
@@ -27,10 +26,10 @@ public class Route {
 	 * @return the wanted data about the route, in an array of points
 	 *         {@link RoutePointInfo}
 	 */
-	public Route(RouteDescription description) {
+	public Route(RouteFunctionsSupplier functionsSupplier) {
 		// initializing x and y functions according to the route description
-		xFunction = description.getFunction(Axis.X);
-		yFunction = description.getFunction(Axis.Y);
+		xFunction = functionsSupplier.getXFunction();
+		yFunction = functionsSupplier.getYFunction();
 	}
 
 	/**
