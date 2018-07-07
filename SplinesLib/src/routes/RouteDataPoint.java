@@ -10,8 +10,9 @@ import utils.Point;
  * 
  * @see Route
  */
-public class RouteDataPoint extends Point {
+public class RouteDataPoint {
 
+	private final Point position;
 	private final double arg;
 	private final double rotationRadius;
 
@@ -34,7 +35,7 @@ public class RouteDataPoint extends Point {
 	 *            beginning point of the route.
 	 */
 	public RouteDataPoint(Point p, double arg, double rotationRadius, double distance, double totalDistance) {
-		super(p);
+		this.position = p;
 
 		this.arg = arg;
 		this.rotationRadius = rotationRadius;
