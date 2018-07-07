@@ -33,22 +33,9 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 		this.finish = finish;
 	}
 
-	/**
-	 * multiplies the derivatives of a {@link FunctionEdgesInfo} object by k
-	 * 
-	 * @param data
-	 *            the specific object
-	 */
-	private void updateDerivatives(FunctionEdgesInfo data) {
-		data.setDerivativeAt0(data.getDerivativeAt0() * k);
-		data.setDerivativeAt1(data.getDerivativeAt1() * k);
-	}
-
 	@Override
 	public DifferentiableFunction getXFunction() {
 		FunctionEdgesInfo result = getXAxisData();
-
-		updateDerivatives(result);
 
 		return Utils.calculate3degreePolinom(result);
 	}
@@ -56,8 +43,6 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	@Override
 	public DifferentiableFunction getYFunction() {
 		FunctionEdgesInfo result = getYAxisData();
-
-		updateDerivatives(result);
 
 		return Utils.calculate3degreePolinom(result);
 	}
@@ -68,7 +53,8 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
 	 */
 	private FunctionEdgesInfo getXAxisData() {
-		return new FunctionEdgesInfo(start.getX(), finish.getX(), Math.cos(start.getYaw()), Math.cos(finish.getYaw()));
+		return new FunctionEdgesInfo(start.getX(), finish.getX(), k * Math.cos(start.getYaw()),
+				k * Math.cos(finish.getYaw()));
 	}
 
 	/**
@@ -77,6 +63,7 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	 * @return a {@link FunctionEdgesInfo} object which contains the mentioned data.
 	 */
 	private FunctionEdgesInfo getYAxisData() {
-		return new FunctionEdgesInfo(start.getY(), finish.getY(), Math.sin(start.getYaw()), Math.sin(finish.getYaw()));
+		return new FunctionEdgesInfo(start.getY(), finish.getY(), k * Math.sin(start.getYaw()),
+				k * Math.sin(finish.getYaw()));
 	}
 }
