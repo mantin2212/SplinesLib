@@ -1,7 +1,7 @@
 package routes.routes;
 
 import functions.DifferentiableFunction;
-import routes.RouteDataPoint;
+import routes.RoutePointInfo;
 import routes.routes.RouteDescription.Axis;
 import utils.Point;
 
@@ -25,7 +25,7 @@ public class Route {
 	 * @param description
 	 *            the data which should specify the route.
 	 * @return the wanted data about the route, in an array of points
-	 *         {@link RouteDataPoint}
+	 *         {@link RoutePointInfo}
 	 */
 	public Route(RouteDescription description) {
 		// initializing x and y functions according to the route description
@@ -35,25 +35,25 @@ public class Route {
 
 	/**
 	 * calculates and returns the information about this route, as an array of
-	 * {@link RouteDataPoint} objects.
+	 * {@link RoutePointInfo} objects.
 	 *
 	 * @param pointFrequency
 	 *            the frequency of the wanted points on the route. also the length
 	 *            of the returned array.
 	 */
-	public RouteDataPoint[] getRoute(int pointsFrequency) {
+	public RoutePointInfo[] getRoute(int pointsFrequency) {
 
 		double s;
 
 		// the length of the array
 		int n = pointsFrequency;
-		RouteDataPoint[] routeData = new RouteDataPoint[n + 1];
+		RoutePointInfo[] routeData = new RoutePointInfo[n + 1];
 
 		for (int i = 0; i <= n; i++) {
 			// calculating the current s value
 			s = (double) i / n;
 			// creating the information object about this point
-			routeData[i] = new RouteDataPoint(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
+			routeData[i] = new RoutePointInfo(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
 					getTotalDistance(i, pointsFrequency));
 		}
 		return routeData;

@@ -10,9 +10,10 @@ import utils.Point;
  * 
  * @see Route
  */
-public class RouteDataPoint {
+public class RoutePointInfo {
 
 	private final Point position;
+
 	private final double arg;
 	private final double rotationRadius;
 
@@ -20,7 +21,7 @@ public class RouteDataPoint {
 	private final double totalDistance;
 
 	/**
-	 * creates s new {@link RouteDataPoint} with given preferences.
+	 * creates s new {@link RoutePointInfo} with given preferences.
 	 * 
 	 * @param p
 	 *            the physical coordinates of the point.
@@ -34,7 +35,7 @@ public class RouteDataPoint {
 	 *            the total distance (on the route) between this point and the
 	 *            beginning point of the route.
 	 */
-	public RouteDataPoint(Point p, double arg, double rotationRadius, double distance, double totalDistance) {
+	public RoutePointInfo(Point p, double arg, double rotationRadius, double distance, double totalDistance) {
 		this.position = p;
 
 		this.arg = arg;
@@ -45,7 +46,7 @@ public class RouteDataPoint {
 	}
 
 	/**
-	 * creates s new {@link RouteDataPoint} with given preferences.
+	 * creates s new {@link RoutePointInfo} with given preferences.
 	 * 
 	 * @param x
 	 *            the x coordinate of this point.
@@ -61,7 +62,7 @@ public class RouteDataPoint {
 	 *            the total distance (on the route) between this point and the
 	 *            beginning point of the route.
 	 */
-	public RouteDataPoint(double x, double y, double arg, double radius, double distance, double totalDistance) {
+	public RoutePointInfo(double x, double y, double arg, double radius, double distance, double totalDistance) {
 		this(new Point(x, y), arg, radius, distance, totalDistance);
 	}
 

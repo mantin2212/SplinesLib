@@ -1,6 +1,6 @@
 package routes.synchronizing;
 
-import routes.RouteDataPoint;
+import routes.RoutePointInfo;
 
 /**
  * the class helps to synchronize a robot's movement with a route. it has an
@@ -15,7 +15,7 @@ public abstract class RouteSynchronizer {
 	protected double robotWidth;
 
 	// the needed information about the route
-	protected RouteDataPoint[] routeData;
+	protected RoutePointInfo[] routeData;
 
 	/**
 	 * the enum describes a side of the robot- LEFT or RIGHT
@@ -34,7 +34,7 @@ public abstract class RouteSynchronizer {
 	 * @param robotWidth
 	 *            the width of the specific robot
 	 */
-	public RouteSynchronizer(RouteDataPoint[] route, double robotWidth) {
+	public RouteSynchronizer(RoutePointInfo[] route, double robotWidth) {
 
 		this.robotWidth = robotWidth;
 
