@@ -7,67 +7,62 @@ import utils.Point;
 
 /**
  * the class describes a route, going between 2 certain points in which the
- * angle of the route is known. it contains one main static function which
- * receives the description of a route, and returns the data about each point of
- * the route, with a received frequency.
- * 
+ * angle of the route is known. it contains one main method which receives the
+ * description of a route, and returns the data about each point of the route,
+ * with a received frequency.
+ *
  * @author noam mantin
  */
 public class Route {
 
 	// the following are the x(s) and y(s) functions
-	private static DifferentiableFunction xFunction;
-	private static DifferentiableFunction yFunction;
-
-	// the frequency of the points the array contains.
-	private static int pointsNumber;
+	private DifferentiableFunction xFunction;
+	private DifferentiableFunction yFunction;
 
 	/**
-	 * the function receives details which specify a route {@link RouteDescription},
-	 * and returns the data about the route.
-	 * 
+	 * creates a new Route with given preferences and a given point frequency.
+	 *
 	 * @param description
 	 *            the data which should specify the route.
-	 * @param PointNumber
-	 *            the frequency of the wanted points. also the length of the
-	 *            returned array.
 	 * @return the wanted data about the route, in an array of points
 	 *         {@link RouteDataPoint}
 	 */
-	public static RouteDataPoint[] getRoute(RouteDescription description, int pointFrequency) {
-
+	public Route(RouteDescription description) {
 		// initializing x and y functions according to the route description
 		xFunction = description.getFunction(Axis.X);
 		yFunction = description.getFunction(Axis.Y);
-
-		// initializing point number
-		pointsNumber = pointFrequency;
-
-		// getting and returning the array
-		return getRouteData();
 	}
 
 	/**
-	 * a function which uses the route data functions in order to initialize the
-	 * data static field of the class.
+	 * calculates and returns the information about this route, as an array of
+	 * {@link RouteDataPoint} objects.
+	 *
+	 * @param pointFrequency
+	 *            the frequency of the wanted points on the route. also the length
+	 *            of the returned array.
 	 */
-	private static RouteDataPoint[] getRouteData() {
+	public RouteDataPoint[] getRoute(int pointsFrequency) {
+
 		double s;
-		int n = pointsNumber;
-		RouteDataPoint[] routeData = new RouteDataPoint[pointsNumber + 1];
+
+		// the length of the array
+		int n = pointsFrequency;
+		RouteDataPoint[] routeData = new RouteDataPoint[n + 1];
 
 		for (int i = 0; i <= n; i++) {
+			// calculating the current s value
 			s = (double) i / n;
-			routeData[i] = new RouteDataPoint(get(s), getArgument(s), getRadius(s), getDistance(i),
-					getTotalDistance(i));
+			// creating the information object about this point
+			routeData[i] = new RouteDataPoint(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
+					getTotalDistance(i, pointsFrequency));
 		}
 		return routeData;
 	}
 
-	//////////////// CONTINOUS ROUTE DATA FUNCTIONS//////////////////////////
+	//////////////// CONTINUOUS ROUTE DATA SUPPLIERS//////////////////////////
 	/*
-	 * the following functions receive a certain s or k and return some data about
-	 * the route at the specific point
+	 * the following refer to the route as a continuous function and calculate
+	 * properties of a given point on the route
 	 */
 
 	/**
@@ -79,7 +74,7 @@ public class Route {
 	 * @return: the point where the route passes at the received s.
 	 */
 
-	private static Point get(double s) {
+	private Point get(double s) {
 		return new Point(xFunction.apply(s), yFunction.apply(s));
 	}
 
@@ -91,7 +86,7 @@ public class Route {
 	 *            the certain s
 	 * @return: the argument, moving from 0 to 2pi
 	 */
-	private static double getArgument(double s) {
+	private double getArgument(double s) {
 
 		// calculating x'(s) and y'(s)
 		double dx = xFunction.getDerivative().apply(s);
@@ -114,7 +109,7 @@ public class Route {
 	 * @return the linear velocity of the route at that s, which is equal to
 	 *         sqrt(x'^2+y'^2)
 	 */
-	private static double getLinearVelocity(double s) {
+	private double getLinearVelocity(double s) {
 
 		// calculating the derivatives of the axis functions at s
 		double xDiff = xFunction.getDerivative().apply(s);
@@ -135,7 +130,7 @@ public class Route {
 	 * @return the angular velocity of the route at that s, which is equal to
 	 *         (x'^2+y'^2)/(y''x'-x''y')
 	 */
-	private static double getAngularVelocity(double s) {
+	private double getAngularVelocity(double s) {
 
 		// calculating first and second derivatives of the axis functions at s
 		double x1 = xFunction.getDerivative().apply(s);
@@ -158,46 +153,56 @@ public class Route {
 	 * 
 	 * @param s
 	 *            the certain s
-	 * @return the radius of the circle. the route at that point is approximately a
-	 *         part of a circle, and thus: r=v/w (r- the radius, v- linear velocity,
-	 *         w- angular velocity)
+	 * @return the radius of the circle mentioned above. the route at that point is
+	 *         approximately a part of a circle, and thus: r=v/w (r- the radius, v-
+	 *         linear velocity, w- angular velocity)
 	 */
-	private static double getRadius(double s) {
+	private double getRadius(double s) {
 		if (getAngularVelocity(s) == 0)// the route goes straight
 			return 0;
 		else
 			return getLinearVelocity(s) / getAngularVelocity(s);
 	}
 
+	//////////////// DISCRETE ROUTE DATA SUPPLIERS//////////////////////////
+	/*
+	 * the following functions refer to the route as an array of points, and
+	 * calculates discrete properties of points on the route.
+	 */
+
 	/**
 	 * the function calculates and returns the distance between two adjacent (TODO
 	 * is that use of the word OK? ) points of the route.
 	 * 
-	 * @param k
+	 * @param index
 	 *            the index of the second of the two points.
+	 * @param frequency
+	 *            the frequency of the points on the route.
 	 * @return the distance between the two points.
 	 */
-	private static double getDistance(int k) {
-		if (k == 0)
+	private double getDistance(int index, int frequency) {
+		if (index == 0)
 			return 0;
 		// the points are in the middle of the route
-		return Point.distance(get((double) k / pointsNumber), get((double) (k - 1) / pointsNumber));
+		return Point.distance(get((double) index / frequency), get((double) (index - 1) / frequency));
 	}
 
 	/**
 	 * the function calculates and returns the total distance, from start to a
 	 * certain point, on the route.
 	 * 
-	 * @param k
+	 * @param index
 	 *            the index of the certain point.
+	 * @param frequency
+	 *            the frequency of the points on the route.
 	 * @return the total distance (on the route) from start to the k'th point.
 	 */
-	private static double getTotalDistance(int k) {
+	private double getTotalDistance(int index, int frequency) {
 
 		double distance = 0;
 
-		for (int i = 1; i < k; i++)
-			distance += getDistance(i);
+		for (int i = 1; i < index; i++)
+			distance += getDistance(i, frequency);
 		return distance;
 	}
 }
