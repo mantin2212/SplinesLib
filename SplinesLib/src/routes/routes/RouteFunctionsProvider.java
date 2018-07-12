@@ -2,7 +2,7 @@ package routes.routes;
 
 import functions.DifferentiableFunction;
 
-public interface RouteFunctionsSupplier {
+public interface RouteFunctionsProvider {
 
 	/**
 	 * calculates and returns the x axis function (x(s)) of the route.

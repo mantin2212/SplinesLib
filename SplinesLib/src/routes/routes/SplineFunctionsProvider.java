@@ -10,7 +10,7 @@ import routes.utils.Position2D;
  *
  * @author noam mantin
  */
-public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
+public class SplineFunctionsProvider implements RouteFunctionsProvider {
 
 	// k is a constant of the route, which determines the curvature of the route.
 	private double k;
@@ -27,7 +27,7 @@ public class SplineFunctionsSupplier implements RouteFunctionsSupplier {
 	 * @param finish
 	 *            the point which should be the end of the route.
 	 */
-	public SplineFunctionsSupplier(Position2D start, Position2D finish, double k) {
+	public SplineFunctionsProvider(Position2D start, Position2D finish, double k) {
 		this.start = start;
 		this.finish = finish;
 	}

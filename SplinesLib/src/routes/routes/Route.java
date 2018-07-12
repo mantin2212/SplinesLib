@@ -26,7 +26,7 @@ public class Route {
 	 * @return the wanted data about the route, in an array of points
 	 *         {@link RoutePointInfo}
 	 */
-	public Route(RouteFunctionsSupplier functionsSupplier) {
+	public Route(RouteFunctionsProvider functionsSupplier) {
 		// initializing x and y functions according to the route description
 		xFunction = functionsSupplier.getXFunction();
 		yFunction = functionsSupplier.getYFunction();
