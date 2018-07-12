@@ -1,6 +1,6 @@
 package routes.utils;
 
-import routes.routes.Route;
+import routes.routes.RouteProvider;
 import utils.Point;
 
 /**
@@ -8,7 +8,7 @@ import utils.Point;
  *
  * @author noam mantin
  * 
- * @see Route
+ * @see RouteProvider
  */
 public class RoutePointInfo {
 
