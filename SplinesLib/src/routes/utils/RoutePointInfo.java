@@ -85,4 +85,17 @@ public class RoutePointInfo {
 	public double getRotationRadius() {
 		return rotationRadius;
 	}
+
+	@Override
+	public String toString() {
+		String result = "";
+
+		// result += "position: " + position;
+		// result += "\nargument: " + arg;
+		// result += "\ndistance: " + distance;
+		// result += "\ntotal distance: " + totalDistance;
+		result += "radius: " + rotationRadius;
+
+		return result;
+	}
 }

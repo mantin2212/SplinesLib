@@ -1,5 +1,7 @@
 package routes.synchronizing;
 
+import java.util.Arrays;
+
 import routes.utils.RoutePointInfo;
 import utils.Utils;
 
@@ -30,12 +32,17 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 	}
 
 	public void initializeSpeeds() {
-
 		maxSpeeds = new double[routeInfo.length];
 
 		for (int i = 0; i < maxSpeeds.length; i++)
 			maxSpeeds[i] = Math.min(maxVelocity, getMaxSpeed(routeInfo[i].getRotationRadius()));
 
+		System.out.println("SPEEDS NO ACCELERATION");
+		for (int i = 0; i < maxSpeeds.length; i++) {
+			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+			System.out.println("SPEED: " + maxSpeeds[i]);
+		}
 		fixAcceleration();
 	}
 
@@ -51,7 +58,21 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 	private void fixAcceleration() {
 		fixPositiveAcceleration();
+		System.out.println("WITH POSITIVE ACCELERATION");
+		for (int i = 0; i < maxSpeeds.length; i++) {
+			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+			System.out.println("SPEED: " + maxSpeeds[i]);
+		}
+
 		fixNegativeAcceleration();
+		System.out.println("FINAL");
+		for (int i = 0; i < maxSpeeds.length; i++) {
+			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+			System.out.println("SPEED: " + maxSpeeds[i]);
+		}
+
 	}
 
 	private void fixPositiveAcceleration() {
@@ -59,7 +80,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 		double distance;
 
-		for (int k = 1; k <= maxSpeeds.length; k++) {
+		for (int k = 1; k < maxSpeeds.length; k++) {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
@@ -72,11 +93,11 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 		maxSpeeds[maxSpeeds.length - 1] = 0;
 
-		for (int k = maxSpeeds.length - 1; k >= 0; k--) {
+		for (int k = maxSpeeds.length - 2; k >= 0; k--) {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
-					Utils.getSpeedWithConstantAcceleration(-maxAcceleration, maxSpeeds[k + 1], distance));
+					Utils.getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k + 1], distance));
 		}
 	}
 }
