@@ -59,7 +59,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 		double distance;
 
-		for (int k = 1; k <= maxSpeeds.length; k++) {
+		for (int k = 1; k < maxSpeeds.length; k++) {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
@@ -72,11 +72,11 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 		maxSpeeds[maxSpeeds.length - 1] = 0;
 
-		for (int k = maxSpeeds.length - 1; k >= 0; k--) {
+		for (int k = maxSpeeds.length - 2; k >= 0; k--) {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
-					Utils.getSpeedWithConstantAcceleration(-maxAcceleration, maxSpeeds[k + 1], distance));
+					Utils.getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k + 1], distance));
 		}
 	}
 }
