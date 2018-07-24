@@ -90,11 +90,11 @@ public class RoutePointInfo {
 	public String toString() {
 		String result = "";
 
-		// result += "position: " + position;
-		// result += "\nargument: " + arg;
+		result += "position: " + position;
+		result += "\nargument: " + arg;
 		// result += "\ndistance: " + distance;
 		// result += "\ntotal distance: " + totalDistance;
-		result += "radius: " + rotationRadius;
+		result += "\nradius: " + rotationRadius;
 
 		return result;
 	}

@@ -1,7 +1,5 @@
 package routes.synchronizing;
 
-import java.util.Arrays;
-
 import routes.utils.RoutePointInfo;
 import utils.Utils;
 
@@ -39,7 +37,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 		System.out.println("SPEEDS NO ACCELERATION");
 		for (int i = 0; i < maxSpeeds.length; i++) {
-			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("s=" + (i + 1.0) / maxSpeeds.length);
 			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
 			System.out.println("SPEED: " + maxSpeeds[i]);
 		}
@@ -60,7 +58,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 		fixPositiveAcceleration();
 		System.out.println("WITH POSITIVE ACCELERATION");
 		for (int i = 0; i < maxSpeeds.length; i++) {
-			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("s=" + (i + 1.0) / maxSpeeds.length);
 			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
 			System.out.println("SPEED: " + maxSpeeds[i]);
 		}
@@ -68,7 +66,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 		fixNegativeAcceleration();
 		System.out.println("FINAL");
 		for (int i = 0; i < maxSpeeds.length; i++) {
-			System.out.println("s=" + (double) i / maxSpeeds.length);
+			System.out.println("s=" + (i + 1.0) / maxSpeeds.length);
 			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
 			System.out.println("SPEED: " + maxSpeeds[i]);
 		}
