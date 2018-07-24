@@ -2,6 +2,14 @@ package routes.routes;
 
 import functions.DifferentiableFunction;
 
+/**
+ * this interface describes an object which should supply the x(s) and y(s)
+ * functions of a route.
+ *
+ * @author noam mantin
+ * 
+ * @see RouteProvider
+ */
 public interface RouteFunctionsProvider {
 
 	/**

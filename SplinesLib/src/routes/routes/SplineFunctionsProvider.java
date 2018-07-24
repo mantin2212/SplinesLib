@@ -26,6 +26,8 @@ public class SplineFunctionsProvider implements RouteFunctionsProvider {
 	 *            the point from which the route should start.
 	 * @param finish
 	 *            the point which should be the end of the route.
+	 * @param k
+	 *            a parameter which defines the curvature of the route.
 	 */
 	public SplineFunctionsProvider(Position2D start, Position2D finish, double k) {
 		this.start = start;
@@ -58,7 +60,7 @@ public class SplineFunctionsProvider implements RouteFunctionsProvider {
 	 *            the derivative of the function at 0
 	 * @param derivativeAt1
 	 *            the derivative of the function at 1
-	 * @return: the polynomial function which should fit the given conditions.
+	 * @return: the polynomial function which should fit the conditions above.
 	 */
 	private PolynomialFunction calculate3degreePolynomial(double valueAt0, double valueAt1, double derivativeAt0,
 			double derivativeAt1) {
