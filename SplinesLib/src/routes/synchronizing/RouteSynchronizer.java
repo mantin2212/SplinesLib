@@ -51,6 +51,8 @@ public class RouteSynchronizer {
 
 	private void initTimes() {
 
+		reachingTimes = new double[routeInfo.length];
+
 		reachingTimes[0] = 0;
 
 		for (int i = 1; i < reachingTimes.length; i++) {
@@ -60,12 +62,14 @@ public class RouteSynchronizer {
 	}
 
 	/**
-	 * calculates and returns the time that should pass between two adjacent points
+	 * calculates and returns the time that should pass between two adjacent
+	 * points
 	 * 
 	 * @param index
 	 *            the index of the second of the two points
 	 * 
-	 * @return the time it should take for the robot to move between the two points
+	 * @return the time it should take for the robot to move between the two
+	 *         points
 	 */
 	private double getDT(int index) {
 		return routeInfo[index].getDistance() / speedProvider.getLinearSpeed(index);
