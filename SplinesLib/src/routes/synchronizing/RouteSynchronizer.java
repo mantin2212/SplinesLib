@@ -51,6 +51,8 @@ public class RouteSynchronizer {
 
 	private void initTimes() {
 
+		reachingTimes = new double[routeInfo.length];
+
 		reachingTimes[0] = 0;
 
 		for (int i = 1; i < reachingTimes.length; i++) {
