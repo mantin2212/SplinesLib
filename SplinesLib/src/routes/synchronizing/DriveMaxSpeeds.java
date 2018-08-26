@@ -66,7 +66,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 		fixNegativeAcceleration();
 		System.out.println("MAX SPEEDS FINAL:");
 		for (int i = 0; i < maxSpeeds.length; i++) {
-			System.out.println("s=" + i / (maxSpeeds.length - 1));
+			System.out.println("s=" + i / (maxSpeeds.length - 1.0));
 			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
 			System.out.println("SPEED: " + maxSpeeds[i]);
 		}
