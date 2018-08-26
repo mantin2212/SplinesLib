@@ -49,6 +49,21 @@ public class RouteSynchronizer {
 		return routeInfo[index].getPosition();
 	}
 
+	public double getVelocity(double time) {
+		int index = -1;
+
+		for (int i = 0; i < reachingTimes.length; i++) {
+			if (time < reachingTimes[i]) {
+				index = i;
+				break;
+			}
+		}
+		if (index == -1)
+			index = reachingTimes.length - 1;
+
+		return speedProvider.getLinearSpeed(index);
+	}
+
 	private void initTimes() {
 
 		reachingTimes = new double[routeInfo.length];
