@@ -2,37 +2,7 @@ package utils;
 
 import java.util.function.Function;
 
-import functions.Polynom;
-import routes.RouteFunctionData;
-
 public class Utils {
-
-	/**
-	 * the function calculates and returns a polynomial function of degree 3
-	 * (as^3+vs^2+cs+d function) according to a result set received
-	 * 
-	 * @param results:
-	 *            should contain 4 elements, in that order: the value of the
-	 *            function at 0, the value of the function at 1, the derivative of
-	 *            the function at 0, and the derivative of the function at 1
-	 * @return: the polynomial function which should fulfill the conditions above
-	 */
-	public static Polynom calculate3degreePolinom(RouteFunctionData data) {
-		// calculating as^3+vs^2+cs+d function
-
-		double totalDiff = data.getFunctionAt1() - data.getFunctionAt0();
-
-		double a = data.getDerivativeAt0() + data.getDerivativeAt1() - 2 * totalDiff;
-
-		double b = 3 * totalDiff - 2 * data.getDerivativeAt0() - data.getDerivativeAt1();
-
-		double c = data.getDerivativeAt0();
-
-		double d = data.getFunctionAt0();
-
-		return new Polynom(d, c, b, a);
-	}
-
 	/**
 	 * the function approximates the definitive integral of a received function, in
 	 * a specific interval
