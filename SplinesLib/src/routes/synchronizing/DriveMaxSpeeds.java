@@ -34,6 +34,12 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 		for (int i = 0; i < maxSpeeds.length; i++)
 			maxSpeeds[i] = Math.min(maxVelocity, getMaxSpeed(routeInfo[i].getRotationRadius()));
 
+		// System.out.println("SPEEDS NO ACCELERATION");
+		// for (int i = 0; i < maxSpeeds.length; i++) {
+		// System.out.println("s=" + i / (maxSpeeds.length - 1));
+		// System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+		// System.out.println("SPEED: " + maxSpeeds[i]);
+		// }
 		fixAcceleration();
 	}
 
@@ -49,8 +55,21 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 	private void fixAcceleration() {
 		fixPositiveAcceleration();
+		// System.out.println("WITH POSITIVE ACCELERATION");
+		// for (int i = 0; i < maxSpeeds.length; i++) {
+		// System.out.println("s=" + (i + 1.0) / maxSpeeds.length);
+		// System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+		// System.out.println("SPEED: " + maxSpeeds[i]);
+		// }
 
 		fixNegativeAcceleration();
+
+		System.out.println("MAX SPEEDS FINAL:");
+		for (int i = 0; i < maxSpeeds.length; i++) {
+			System.out.println("s=" + i / (maxSpeeds.length - 1.0));
+			System.out.println("RADIUS: " + routeInfo[i].getRotationRadius());
+			System.out.println("SPEED: " + maxSpeeds[i]);
+		}
 	}
 
 	private void fixPositiveAcceleration() {
