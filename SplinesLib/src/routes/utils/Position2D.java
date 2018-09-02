@@ -77,4 +77,17 @@ public class Position2D extends Point2D.Double {
 	public void setAngle(double yaw) {
 		this.yawAngle = yaw;
 	}
+
+	/**
+	 * moves this point in the given values
+	 * 
+	 * @param dx
+	 *            - the value the x coordinate of the point should move
+	 * @param dy
+	 *            - the value the y coordinate of the point should move
+	 */
+	public void move(double dx, double dy) {
+		this.x += dx;
+		this.y += dy;
+	}
 }
