@@ -1,7 +1,7 @@
 package routes.utils;
 
 import routes.routes.RouteProvider;
-import utils.Point;
+import java.awt.geom.Point2D;
 
 /**
  * this class contains extended information about a point in a route.
@@ -12,7 +12,7 @@ import utils.Point;
  */
 public class RoutePointInfo {
 
-	private final Point position;
+	private final Point2D position;
 
 	private final double arg;
 	private final double rotationRadius;
@@ -36,7 +36,7 @@ public class RoutePointInfo {
 	 *            the total distance (on the route) between this point and the
 	 *            beginning point of the route.
 	 */
-	public RoutePointInfo(Point p, double arg, double rotationRadius, double distance, double totalDistance) {
+	public RoutePointInfo(Point2D p, double arg, double rotationRadius, double distance, double totalDistance) {
 		this.position = p;
 
 		this.arg = arg;
@@ -65,10 +65,10 @@ public class RoutePointInfo {
 	 *            beginning point of the route.
 	 */
 	public RoutePointInfo(double x, double y, double arg, double radius, double distance, double totalDistance) {
-		this(new Point(x, y), arg, radius, distance, totalDistance);
+		this(new Point2D.Double(x, y), arg, radius, distance, totalDistance);
 	}
 
-	public Point getPosition() {
+	public Point2D getPosition() {
 		return position;
 	}
 
