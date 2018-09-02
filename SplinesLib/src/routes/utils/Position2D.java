@@ -52,11 +52,11 @@ public class Position2D extends Point2D.Double {
 	/**
 	 * copies a given {@link Position2D} object's properties into this one.
 	 *
-	 * @param ap
+	 * @param position
 	 *            the position of the object.
 	 */
-	public Position2D(Position2D ap) {
-		this(ap.getX(), ap.getY(), ap.yawAngle);
+	public Position2D(Position2D position) {
+		this(position.getX(), position.getY(), position.yawAngle);
 	}
 
 	/**
