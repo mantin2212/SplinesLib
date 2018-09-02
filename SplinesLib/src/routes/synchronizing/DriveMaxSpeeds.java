@@ -30,7 +30,6 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 	}
 
 	public void initializeSpeeds() {
-
 		maxSpeeds = new double[routeInfo.length];
 
 		for (int i = 0; i < maxSpeeds.length; i++)
@@ -51,6 +50,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 	private void fixAcceleration() {
 		fixPositiveAcceleration();
+
 		fixNegativeAcceleration();
 	}
 
