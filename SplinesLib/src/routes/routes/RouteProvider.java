@@ -2,7 +2,7 @@ package routes.routes;
 
 import functions.DifferentiableFunction;
 import routes.utils.RoutePointInfo;
-import utils.Point;
+import java.awt.geom.Point2D;
 
 /**
  * the class describes a route, going between 2 certain points in which the
@@ -37,8 +37,8 @@ public class RouteProvider {
 	 * {@link RoutePointInfo} objects.
 	 *
 	 * @param pointFrequency
-	 *            the frequency of the wanted points on the route. also the length
-	 *            of the returned array.
+	 *            the frequency of the wanted points on the route. also the
+	 *            length of the returned array.
 	 */
 	public RoutePointInfo[] getRoute(int pointsFrequency) {
 
@@ -73,13 +73,13 @@ public class RouteProvider {
 	 * @return: the point where the route passes at the received s.
 	 */
 
-	private Point get(double s) {
-		return new Point(xFunction.apply(s), yFunction.apply(s));
+	private Point2D get(double s) {
+		return new Point2D.Double(xFunction.apply(s), yFunction.apply(s));
 	}
 
 	/**
-	 * the function receives a specific s and calculates the argument of the route
-	 * relative to the positive direction of the x axis, at this s.
+	 * the function receives a specific s and calculates the argument of the
+	 * route relative to the positive direction of the x axis, at this s.
 	 * 
 	 * @param s:
 	 *            the certain s
@@ -100,8 +100,8 @@ public class RouteProvider {
 	}
 
 	/**
-	 * the functions calculates and returns the linear velocity (relative to s) in a
-	 * certain s.
+	 * the functions calculates and returns the linear velocity (relative to s)
+	 * in a certain s.
 	 * 
 	 * @param s
 	 *            the certain s.
@@ -121,8 +121,8 @@ public class RouteProvider {
 	}
 
 	/**
-	 * the functions calculates and returns the angular velocity (relative to s) in
-	 * a certain s.
+	 * the functions calculates and returns the angular velocity (relative to s)
+	 * in a certain s.
 	 * 
 	 * @param s
 	 *            the certain s.
@@ -152,9 +152,9 @@ public class RouteProvider {
 	 * 
 	 * @param s
 	 *            the certain s
-	 * @return the radius of the circle mentioned above. the route at that point is
-	 *         approximately a part of a circle, and thus: r=v/w (r- the radius, v-
-	 *         linear velocity, w- angular velocity)
+	 * @return the radius of the circle mentioned above. the route at that point
+	 *         is approximately a part of a circle, and thus: r=v/w (r- the
+	 *         radius, v- linear velocity, w- angular velocity)
 	 */
 	private double getRadius(double s) {
 		if (getAngularVelocity(s) == 0)// the route goes straight
@@ -170,8 +170,8 @@ public class RouteProvider {
 	 */
 
 	/**
-	 * the function calculates and returns the distance between two adjacent (TODO
-	 * is that use of the word OK? ) points of the route.
+	 * the function calculates and returns the distance between two adjacent
+	 * (TODO is that use of the word OK? ) points of the route.
 	 * 
 	 * @param index
 	 *            the index of the second of the two points.
@@ -182,8 +182,13 @@ public class RouteProvider {
 	private double getDistance(int index, int frequency) {
 		if (index == 0)
 			return 0;
-		// the points are in the middle of the route
-		return Point.distance(get((double) index / frequency), get((double) (index - 1) / frequency));
+		
+		// calculating the adjacent points by their indexes
+		Point2D prev = get((double) index / frequency);
+		Point2D current = get((double) (index - 1) / frequency);
+
+		// returning the distance between the points
+		return prev.distance(current);
 	}
 
 	/**

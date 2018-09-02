@@ -1,7 +1,8 @@
 package routes.synchronizing;
 
+import java.awt.geom.Point2D;
+
 import routes.utils.RoutePointInfo;
-import utils.Point;
 
 /**
  * the class helps to synchronize a robot's movement with a route. it has an
@@ -33,7 +34,7 @@ public class RouteSynchronizer {
 		initTimes();
 	}
 
-	public Point getPosition(double time) {
+	public Point2D getPosition(double time) {
 
 		int index = -1;
 

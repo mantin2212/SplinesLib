@@ -1,6 +1,6 @@
 package routes.utils;
 
-import utils.Point;
+import java.awt.geom.Point2D;
 
 /**
  * this class describes a 2D position of an object, as a point and a yaw angle
@@ -13,14 +13,16 @@ import utils.Point;
  * @author noam mantin
  *
  */
-public class Position2D extends Point {
+public class Position2D extends Point2D.Double {
+
+	private static final long serialVersionUID = 1L;
 
 	// the yaw angle of the point
 	private double yawAngle;
 
 	/**
-	 * creates a new {@link Position2D} object, with specific x,y values and a given
-	 * angle.
+	 * creates a new {@link Position2D} object, with specific x,y values and a
+	 * given angle.
 	 *
 	 * @param x
 	 *            the x axis value of the point
@@ -42,8 +44,8 @@ public class Position2D extends Point {
 	 * @param yaw
 	 *            the wanted angle.
 	 */
-	public Position2D(Point p, double yaw) {
-		super(p);
+	public Position2D(Point2D p, double yaw) {
+		super(p.getX(), p.getY());
 		this.yawAngle = yaw;
 	}
 
@@ -54,7 +56,7 @@ public class Position2D extends Point {
 	 *            the position of the object.
 	 */
 	public Position2D(Position2D ap) {
-		this(new Point(ap.getX(), ap.getY()), ap.yawAngle);
+		this(ap.getX(), ap.getY(), ap.yawAngle);
 	}
 
 	/**
