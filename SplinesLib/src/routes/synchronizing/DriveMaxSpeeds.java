@@ -1,7 +1,6 @@
 package routes.synchronizing;
 
 import routes.utils.RoutePointInfo;
-import utils.Utils;
 
 public class DriveMaxSpeeds implements RouteSpeedProvider {
 
@@ -63,7 +62,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
-					Utils.getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k - 1], distance));
+					getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k - 1], distance));
 		}
 	}
 
@@ -76,7 +75,11 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 			distance = routeInfo[k].getDistance();
 
 			maxSpeeds[k] = Math.min(maxSpeeds[k],
-					Utils.getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k + 1], distance));
+					getSpeedWithConstantAcceleration(maxAcceleration, maxSpeeds[k + 1], distance));
 		}
+	}
+
+	private static double getSpeedWithConstantAcceleration(double acceleration, double initSpeed, double distance) {
+		return Math.sqrt(initSpeed * initSpeed + 2 * acceleration * distance);
 	}
 }

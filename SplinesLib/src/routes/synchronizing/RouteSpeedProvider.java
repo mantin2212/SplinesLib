@@ -15,11 +15,10 @@ public interface RouteSpeedProvider {
 	 * 
 	 * @param index
 	 *            the index of the referred point.
-	 * @return the linear speed an object (the robot, for example) should have when
-	 *         passing in the point with the given index.
+	 * @return the linear speed an object (the robot, for example) should have
+	 *         when passing in the point with the given index.
 	 * 
 	 * @see RouteSynchronizer
 	 */
 	abstract double getLinearSpeed(int index);
-
 }

@@ -8,7 +8,7 @@ import functions.DifferentiableFunction;
  *
  * @author noam mantin
  * 
- * @see RouteProvider
+ * @see RouteDataProvider
  */
 public interface RouteFunctionsProvider {
 

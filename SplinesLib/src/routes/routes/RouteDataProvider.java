@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
  *
  * @author noam mantin
  */
-public class RouteProvider {
+public class RouteDataProvider {
 
 	// the following are the x(s) and y(s) functions
 	private DifferentiableFunction xFunction;
@@ -26,7 +26,7 @@ public class RouteProvider {
 	 * @return the wanted data about the route, in an array of points
 	 *         {@link RoutePointInfo}
 	 */
-	public RouteProvider(RouteFunctionsProvider functionsSupplier) {
+	public RouteDataProvider(RouteFunctionsProvider functionsSupplier) {
 		// initializing x and y functions according to the route description
 		xFunction = functionsSupplier.getXFunction();
 		yFunction = functionsSupplier.getYFunction();
@@ -40,7 +40,7 @@ public class RouteProvider {
 	 *            the frequency of the wanted points on the route. also the
 	 *            length of the returned array.
 	 */
-	public RoutePointInfo[] getRoute(int pointsFrequency) {
+	public RoutePointInfo[] getRouteData(int pointsFrequency) {
 
 		double s;
 
@@ -52,8 +52,8 @@ public class RouteProvider {
 			// calculating the current s value
 			s = (double) i / n;
 			// creating the information object about this point
-			routeData[i] = new RoutePointInfo(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
-					getTotalDistance(i, pointsFrequency));
+			routeData[i] = new RoutePointInfo(getPosition(s), getArgument(s), getRadius(s),
+					getDistance(i, pointsFrequency), getTotalDistance(i, pointsFrequency));
 		}
 		return routeData;
 	}
@@ -73,7 +73,7 @@ public class RouteProvider {
 	 * @return: the point where the route passes at the received s.
 	 */
 
-	private Point2D get(double s) {
+	private Point2D getPosition(double s) {
 		return new Point2D.Double(xFunction.apply(s), yFunction.apply(s));
 	}
 
@@ -83,7 +83,7 @@ public class RouteProvider {
 	 * 
 	 * @param s:
 	 *            the certain s
-	 * @return: the argument, moving from 0 to 2pi
+	 * @return: the argument in radians, moving from 0 to 2pi
 	 */
 	private double getArgument(double s) {
 
@@ -98,6 +98,8 @@ public class RouteProvider {
 
 		return arg;
 	}
+
+	//////////////// Methods to calculate the rotation radius ////////////////
 
 	/**
 	 * the functions calculates and returns the linear velocity (relative to s)
@@ -182,10 +184,10 @@ public class RouteProvider {
 	private double getDistance(int index, int frequency) {
 		if (index == 0)
 			return 0;
-		
+
 		// calculating the adjacent points by their indexes
-		Point2D prev = get((double) index / frequency);
-		Point2D current = get((double) (index - 1) / frequency);
+		Point2D prev = getPosition((double) index / frequency);
+		Point2D current = getPosition((double) (index - 1) / frequency);
 
 		// returning the distance between the points
 		return prev.distance(current);

@@ -34,7 +34,7 @@ public class RouteSynchronizer {
 		initTimes();
 	}
 
-	public Point2D getPosition(double time) {
+	public Point2D getPositionByTime(double time) {
 
 		int index = -1;
 
