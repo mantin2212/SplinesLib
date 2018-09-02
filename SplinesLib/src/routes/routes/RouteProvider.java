@@ -30,11 +30,6 @@ public class RouteProvider {
 		// initializing x and y functions according to the route description
 		xFunction = functionsSupplier.getXFunction();
 		yFunction = functionsSupplier.getYFunction();
-
-		System.out.println("X AXIS FUNCTION: " + xFunction);
-		System.out.println("X AXIS DERIVATIVE: " + xFunction.getDerivative());
-		System.out.println("Y AXIS FUNCTION: " + yFunction);
-		System.out.println("Y AXIS DERIVATIVE: " + yFunction.getDerivative());
 	}
 
 	/**
@@ -53,16 +48,12 @@ public class RouteProvider {
 		int n = pointsFrequency;
 		RoutePointInfo[] routeData = new RoutePointInfo[n + 1];
 
-		System.out.println("ROUTE INFO");
-
 		for (int i = 0; i <= n; i++) {
 			// calculating the current s value
 			s = (double) i / n;
 			// creating the information object about this point
-			System.out.println("s: " + s);
 			routeData[i] = new RoutePointInfo(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
 					getTotalDistance(i, pointsFrequency));
-			System.out.println(routeData[i]);
 		}
 		return routeData;
 	}
