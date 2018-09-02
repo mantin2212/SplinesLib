@@ -18,7 +18,7 @@ public class MaxSpeedsFactory implements SpeedProviderFactory {
 
 	@Override
 	public RouteSpeedProvider getSpeedProvider(RoutePointInfo[] routeInfo) {
-		return new DriveMaxSpeeds(routeInfo, robotWidth, maxVelocity, maxAcceleration);
+		return new MaxSpeedsProvider(routeInfo, robotWidth, maxVelocity, maxAcceleration);
 	}
 
 }

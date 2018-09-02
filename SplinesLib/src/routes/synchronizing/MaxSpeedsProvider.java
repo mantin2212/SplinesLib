@@ -2,7 +2,7 @@ package routes.synchronizing;
 
 import routes.utils.RoutePointInfo;
 
-public class DriveMaxSpeeds implements RouteSpeedProvider {
+public class MaxSpeedsProvider implements RouteSpeedProvider {
 
 	private RoutePointInfo[] routeInfo;
 	private double robotWidth;
@@ -12,7 +12,7 @@ public class DriveMaxSpeeds implements RouteSpeedProvider {
 
 	private double[] maxSpeeds;
 
-	public DriveMaxSpeeds(RoutePointInfo[] routeInfo, double robotWidth, double maxVelocity, double maxAcceleration) {
+	public MaxSpeedsProvider(RoutePointInfo[] routeInfo, double robotWidth, double maxVelocity, double maxAcceleration) {
 
 		this.routeInfo = routeInfo;
 		this.robotWidth = robotWidth;
