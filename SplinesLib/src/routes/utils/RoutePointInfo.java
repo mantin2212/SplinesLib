@@ -30,7 +30,8 @@ public class RoutePointInfo {
 	 * @param rotationRadius
 	 *            the rotation radius of the route in this point.
 	 * @param distance
-	 *            the distance between this point of the route and the previous one.
+	 *            the distance between this point of the route and the previous
+	 *            one.
 	 * @param totalDistance
 	 *            the total distance (on the route) between this point and the
 	 *            beginning point of the route.
@@ -57,7 +58,8 @@ public class RoutePointInfo {
 	 * @param rotationRadius
 	 *            the rotation radius of the route in this point.
 	 * @param distance
-	 *            the distance between this point of the route and the previous one.
+	 *            the distance between this point of the route and the previous
+	 *            one.
 	 * @param totalDistance
 	 *            the total distance (on the route) between this point and the
 	 *            beginning point of the route.
@@ -84,18 +86,5 @@ public class RoutePointInfo {
 
 	public double getRotationRadius() {
 		return rotationRadius;
-	}
-
-	@Override
-	public String toString() {
-		String result = "";
-
-		result += "position: " + position;
-		result += "\nargument: " + arg;
-		// result += "\ndistance: " + distance;
-		// result += "\ntotal distance: " + totalDistance;
-		result += "\nradius: " + rotationRadius;
-
-		return result;
 	}
 }
