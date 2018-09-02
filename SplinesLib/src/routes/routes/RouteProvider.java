@@ -52,7 +52,7 @@ public class RouteProvider {
 			// calculating the current s value
 			s = (double) i / n;
 			// creating the information object about this point
-			routeData[i] = new RoutePointInfo(get(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
+			routeData[i] = new RoutePointInfo(getPosition(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
 					getTotalDistance(i, pointsFrequency));
 		}
 		return routeData;
@@ -73,7 +73,7 @@ public class RouteProvider {
 	 * @return: the point where the route passes at the received s.
 	 */
 
-	private Point2D get(double s) {
+	private Point2D getPosition(double s) {
 		return new Point2D.Double(xFunction.apply(s), yFunction.apply(s));
 	}
 
@@ -184,8 +184,8 @@ public class RouteProvider {
 			return 0;
 		
 		// calculating the adjacent points by their indexes
-		Point2D prev = get((double) index / frequency);
-		Point2D current = get((double) (index - 1) / frequency);
+		Point2D prev = getPosition((double) index / frequency);
+		Point2D current = getPosition((double) (index - 1) / frequency);
 
 		// returning the distance between the points
 		return prev.distance(current);
