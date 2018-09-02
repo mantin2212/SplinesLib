@@ -32,8 +32,6 @@ public class SplineFunctionsProvider implements RouteFunctionsProvider {
 	public SplineFunctionsProvider(Position2D start, Position2D finish, double k) {
 		this.start = start;
 		this.finish = finish;
-
-		this.k = k;
 	}
 
 	@Override
