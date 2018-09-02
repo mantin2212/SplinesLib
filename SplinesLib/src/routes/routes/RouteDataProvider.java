@@ -52,8 +52,8 @@ public class RouteDataProvider {
 			// calculating the current s value
 			s = (double) i / n;
 			// creating the information object about this point
-			routeData[i] = new RoutePointInfo(getPosition(s), getArgument(s), getRadius(s), getDistance(i, pointsFrequency),
-					getTotalDistance(i, pointsFrequency));
+			routeData[i] = new RoutePointInfo(getPosition(s), getArgument(s), getRadius(s),
+					getDistance(i, pointsFrequency), getTotalDistance(i, pointsFrequency));
 		}
 		return routeData;
 	}
@@ -83,7 +83,7 @@ public class RouteDataProvider {
 	 * 
 	 * @param s:
 	 *            the certain s
-	 * @return: the argument, moving from 0 to 2pi
+	 * @return: the argument in radians, moving from 0 to 2pi
 	 */
 	private double getArgument(double s) {
 
@@ -98,6 +98,8 @@ public class RouteDataProvider {
 
 		return arg;
 	}
+
+	//////////////// Methods to calculate the rotation radius ////////////////
 
 	/**
 	 * the functions calculates and returns the linear velocity (relative to s)
@@ -182,7 +184,7 @@ public class RouteDataProvider {
 	private double getDistance(int index, int frequency) {
 		if (index == 0)
 			return 0;
-		
+
 		// calculating the adjacent points by their indexes
 		Point2D prev = getPosition((double) index / frequency);
 		Point2D current = getPosition((double) (index - 1) / frequency);
