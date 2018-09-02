@@ -6,7 +6,7 @@ package routes.synchronizing;
  *
  * @author noam mantin
  * 
- * @see DriveMaxSpeeds
+ * @see MaxSpeedsProvider
  */
 public interface RouteSpeedProvider {
 
