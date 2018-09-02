@@ -12,7 +12,7 @@ import java.awt.geom.Point2D;
  *
  * @author noam mantin
  */
-public class RouteProvider {
+public class RouteDataProvider {
 
 	// the following are the x(s) and y(s) functions
 	private DifferentiableFunction xFunction;
@@ -26,7 +26,7 @@ public class RouteProvider {
 	 * @return the wanted data about the route, in an array of points
 	 *         {@link RoutePointInfo}
 	 */
-	public RouteProvider(RouteFunctionsProvider functionsSupplier) {
+	public RouteDataProvider(RouteFunctionsProvider functionsSupplier) {
 		// initializing x and y functions according to the route description
 		xFunction = functionsSupplier.getXFunction();
 		yFunction = functionsSupplier.getYFunction();
@@ -40,7 +40,7 @@ public class RouteProvider {
 	 *            the frequency of the wanted points on the route. also the
 	 *            length of the returned array.
 	 */
-	public RoutePointInfo[] getRoute(int pointsFrequency) {
+	public RoutePointInfo[] getRouteData(int pointsFrequency) {
 
 		double s;
 

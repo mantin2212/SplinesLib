@@ -2,7 +2,7 @@ package routes.utils;
 
 import java.awt.geom.Point2D;
 
-import routes.routes.RouteProvider;
+import routes.routes.RouteDataProvider;
 
 /**
  * this class contains extended information about a point in a route:
@@ -16,7 +16,7 @@ import routes.routes.RouteProvider;
  *
  * @author noam mantin
  * 
- * @see RouteProvider
+ * @see RouteDataProvider
  */
 public class RoutePointInfo {
 
